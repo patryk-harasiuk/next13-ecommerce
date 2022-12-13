@@ -1,22 +1,23 @@
 import ElementOneIcon from 'public/assets/icons/element-one.svg';
 import ElementTwoIcon from 'public/assets/icons/element-two.svg';
 import ElementThreeIcon from 'public/assets/icons/element-three.svg';
+import FooterEarthImage from 'public/assets/images/footer-earth-image.png';
 import Image from 'next/image';
 
 export default function Home() {
   return (
     <div>
-      <div className="relative">
-        <div className="bg-hero-first h-[300px] bg-no-repeat bg-cover bg-center"></div>
-        <div className="bg-hero-second h-[300px] bg-no-repeat bg-cover bg-top"></div>
-        <button className="border border-[#00B495] bg-[#00B495] text-white text-lg rounded-2xl px-8 py-3 transition duration-500 ease select-none  absolute top-3/4 left-1/2 -translate-x-2/4">
+      <div className="relative lg:flex lg:w-full">
+        <div className="bg-hero-first lg:w-1/2 lg:h-[700px] h-[300px] bg-no-repeat bg-cover bg-center"></div>
+        <div className="bg-hero-second lg:w-1/2 lg:h-[700px] h-[300px] bg-no-repeat bg-cover bg-top"></div>
+        <button className="border border-[#00B495] bg-[#00B495] text-white text-lg rounded-2xl px-8 py-3 transition duration-500 ease select-none absolute top-3/4 lg:top-2/4 left-1/2 -translate-x-2/4">
           Shop now
         </button>
       </div>
 
-      <div className="relative pt-[140px] lg:w-full">
+      <div className="relative pt-[140px] lg:pt-0 lg:w-full">
         <div
-          className="prose  pt-[80px] text-lg isolate
+          className="prose  pt-[80px] text-lg lg:text-2xl isolate
         flex flex-col gap-11 max-w-[350px] text-center mx-auto px-4"
         >
           <Image src={ElementOneIcon} alt="" className="absolute top-4 -left-5 z-10" />
@@ -38,7 +39,7 @@ export default function Home() {
       </div>
 
       <footer className="bg-[#16193A] text-white pt-16 px-6 mt-24">
-        <div className="flex gap-14">
+        <div className="relative flex gap-14 w-full">
           <ul className="flex flex-col gap-4">
             <li>Product 1</li>
             <li>Product 2</li>
@@ -48,6 +49,8 @@ export default function Home() {
           <ul className="flex flex-col gap-4">
             <li>FAQ</li>
           </ul>
+
+          <Image src={FooterEarthImage} alt="" className=" self-end" />
         </div>
       </footer>
     </div>

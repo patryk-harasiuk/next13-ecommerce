@@ -11,9 +11,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head />
 
       <body>
-        <header className="navbar h-20 w-full flex items-start justify-between py-4 px-5 border-b border-black">
+        <header className="navbar h-20 w-full flex items-start lg:items-center justify-between py-4 px-5 border-b border-black">
           {/* <div className="w-5 h-4"> */}
-          <div className="dropdown">
+          <div className="dropdown lg:hidden">
             <label tabIndex={0} className="lg:hidden">
               <HamburgerMenu />
             </label>
@@ -33,12 +33,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
           {/* </div> */}
 
-          <div className="flex flex-col gap-4">
-            <h1 className="text-emerald-500 font-medium text-xl italic leading-none text-center">
+          <div className="flex flex-col lg:flex-row gap-4">
+            <h1 className="text-emerald-500 font-medium text-xl lg:text-3xl italic leading-none text-center">
               Yee<span className="text-green-300 font-medium italic">Shirts</span>
             </h1>
 
-            <div className="flex gap-5 text-xs">
+            <div className="flex gap-5 lg:gap-10 text-xs lg:text-lg lg:pl-10">
               <Link href="/">Product 1</Link>
               <Link href="/">Product 2</Link>
             </div>
