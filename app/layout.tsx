@@ -11,15 +11,34 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head />
 
       <body>
-        <header className="h-20 w-full flex items-start justify-between py-4 px-5 border-b border-black">
-          <HamburgerMenu />
+        <header className="navbar h-20 w-full flex items-start justify-between py-4 px-5 border-b border-black">
+          {/* <div className="w-5 h-4"> */}
+          <div className="dropdown">
+            <label tabIndex={0} className="lg:hidden">
+              <HamburgerMenu />
+            </label>
+
+            <ul
+              tabIndex={0}
+              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+            >
+              <li>
+                <Link href="/">Product 1</Link>
+              </li>
+
+              <li>
+                <Link href="/">Product 2</Link>
+              </li>
+            </ul>
+          </div>
+          {/* </div> */}
 
           <div className="flex flex-col gap-4">
             <h1 className="text-emerald-500 font-medium text-xl italic leading-none text-center">
               Yee<span className="text-green-300 font-medium italic">Shirts</span>
             </h1>
 
-            <div className="flex gap-5">
+            <div className="flex gap-5 text-xs">
               <Link href="/">Product 1</Link>
               <Link href="/">Product 2</Link>
             </div>
@@ -38,7 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </nav>
         </header>
 
-        <main>{children}</main>
+        <main className="overflow-x-hidden">{children}</main>
       </body>
     </html>
   );
