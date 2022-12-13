@@ -1,57 +1,58 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+import ElementOneIcon from 'public/assets/icons/element-one.svg';
+import ElementTwoIcon from 'public/assets/icons/element-two.svg';
+import ElementThreeIcon from 'public/assets/icons/element-three.svg';
+import FooterEarthImage from 'public/assets/images/footer-earth-image.png';
+import Image from 'next/image';
 
 export default function Home() {
   return (
-    <div className={styles.container}>
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js 13!</a>
-        </h1>
+    <div>
+      <div className="relative lg:flex lg:w-full">
+        <div className="bg-hero-first lg:w-1/2 lg:h-[700px] h-[300px] bg-no-repeat bg-cover bg-center"></div>
+        <div className="bg-hero-second lg:w-1/2 lg:h-[700px] h-[300px] bg-no-repeat bg-cover bg-top"></div>
+        <button className="border border-[#00B495] bg-[#00B495] text-white text-lg rounded-2xl px-8 py-3 transition duration-500 ease select-none absolute top-3/4 lg:top-2/4 left-1/2 -translate-x-2/4">
+          Shop now
+        </button>
+      </div>
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://beta.nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js 13</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Explore the Next.js 13 playground.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/templates/next.js/app-directory?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>Deploy your Next.js site to a public URL with Vercel.</p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+      <div className="relative pt-[140px] lg:pt-0 lg:w-full">
+        <div
+          className="prose  pt-[80px] text-lg lg:text-2xl isolate
+        flex flex-col gap-11 max-w-[350px] text-center mx-auto px-4"
         >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
+          <Image src={ElementOneIcon} alt="" className="absolute top-4 -left-5 z-10" />
+          <Image src={ElementTwoIcon} alt="" className="absolute  top-4 -right-5 z-10" />
+
+          <p className="m-0">
+            We are YeeShirts. We love this planet. That&apos;s why our garments is made using zero
+            waste pattern cutting from natural and re-purposed fabrics{' '}
+          </p>
+
+          <p className="text-center m-0">For you and for our planet</p>
+
+          <Image
+            src={ElementThreeIcon}
+            alt=""
+            className="absolute  -bottom-[125px] -right-5 z-10"
+          />
+        </div>
+      </div>
+
+      <footer className="bg-[#16193A] text-white pt-16 px-6 mt-24">
+        <div className="relative flex gap-14 w-full">
+          <ul className="flex flex-col gap-4">
+            <li>Product 1</li>
+            <li>Product 2</li>
+            <li>Find store</li>
+          </ul>
+
+          <ul className="flex flex-col gap-4">
+            <li>FAQ</li>
+          </ul>
+
+          <Image src={FooterEarthImage} alt="" className=" self-end" />
+        </div>
       </footer>
     </div>
-  )
+  );
 }
