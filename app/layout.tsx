@@ -5,6 +5,8 @@ import CartIcon from 'public/assets/icons/cart.svg';
 import SearchIcon from 'public/assets/icons/search.svg';
 import { Roboto } from '@next/font/google';
 import './globals.css';
+import Footer from './(components)/Footer';
+import Navbar from './(components)/Navbar';
 
 const roboto = Roboto({
   weight: '400',
@@ -17,53 +19,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head />
 
       <body className="font-sans">
-        <header className="navbar h-20 w-full flex items-start lg:items-center justify-between py-4 px-5 border-b border-black">
-          {/* <div className="w-5 h-4"> */}
-          <div className="dropdown lg:hidden">
-            <label tabIndex={0} className="lg:hidden">
-              <HamburgerMenu />
-            </label>
+        <Navbar />
 
-            <ul
-              tabIndex={0}
-              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-            >
-              <li>
-                <Link href="/">Product 1</Link>
-              </li>
+        <main className=" overflow-x-clip">{children}</main>
 
-              <li>
-                <Link href="/">Product 2</Link>
-              </li>
-            </ul>
-          </div>
-          {/* </div> */}
-
-          <div className="flex flex-col lg:flex-row gap-4">
-            <h1 className="text-emerald-500 font-medium text-xl lg:text-3xl italic leading-none text-center">
-              Yee<span className="text-green-300 font-medium italic">Shirts</span>
-            </h1>
-
-            <div className="flex gap-5 lg:gap-10 text-xs lg:text-lg lg:pl-10">
-              <Link href="/">Product 1</Link>
-              <Link href="/">Product 2</Link>
-            </div>
-          </div>
-
-          <nav>
-            <ul className="flex gap-[9px]">
-              <li>
-                <Image alt="cart" src={CartIcon} />
-              </li>
-
-              <li>
-                <Image alt="search" src={SearchIcon} />
-              </li>
-            </ul>
-          </nav>
-        </header>
-
-        <main className="overflow-x-hidden">{children}</main>
+        <Footer />
       </body>
     </html>
   );
