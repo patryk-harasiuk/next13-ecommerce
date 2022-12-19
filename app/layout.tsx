@@ -3,14 +3,20 @@ import Link from 'next/link';
 import HamburgerMenu from 'components/HamburgerMenu';
 import CartIcon from 'public/assets/icons/cart.svg';
 import SearchIcon from 'public/assets/icons/search.svg';
+import { Roboto } from '@next/font/google';
 import './globals.css';
+
+const roboto = Roboto({
+  weight: '400',
+  variable: '--font-roboto',
+});
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={roboto.variable}>
       <head />
 
-      <body>
+      <body className="font-sans">
         <header className="navbar h-20 w-full flex items-start lg:items-center justify-between py-4 px-5 border-b border-black">
           {/* <div className="w-5 h-4"> */}
           <div className="dropdown lg:hidden">
