@@ -1,4 +1,6 @@
-import SigninForm from '../(components)/SigninForm';
+'use client';
+
+import SigninForm from '../SigninForm';
 
 const Signin = (): JSX.Element => {
   const handleSignup = () => console.log('logged in!');

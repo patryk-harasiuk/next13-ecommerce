@@ -11,9 +11,6 @@ module.exports = {
         'light-green': '#00B495',
         'deep-purple': '#16193A',
       },
-      fontFamily: {
-        sans: ['var(--font-roboto)'],
-      },
     },
   },
   plugins: [require('@tailwindcss/typography'), require('daisyui')],

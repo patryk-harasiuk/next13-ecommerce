@@ -3,9 +3,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import SearchIcon from '@/public/assets/icons/search.svg';
 import CartIcon from '@/public/assets/icons/cart.svg';
+import UserIcon from '@/public/assets/icons/user.svg';
 
 const Navbar = (): JSX.Element => (
-  <header className="navbar fixed top-0 z-10 bg-white h-20 w-full flex items-start lg:items-center justify-between py-4 px-5 border-b border-black">
+  <header className="navbar sticky top-0 left-0 z-50 bg-white h-20 w-full flex items-start lg:items-center justify-between py-4 px-5 border-b border-black">
     <div className="dropdown lg:hidden">
       <label tabIndex={0} className="lg:hidden">
         <HamburgerMenu />
@@ -37,12 +38,18 @@ const Navbar = (): JSX.Element => (
     </div>
 
     <nav>
-      <ul className="flex gap-[9px]">
-        <li>
+      <ul className="flex gap-4">
+        <li className="cursor-pointer">
+          <Link href="/signin">
+            <Image alt="user" src={UserIcon} width="20" height="20" />
+          </Link>
+        </li>
+
+        <li className="cursor-pointer">
           <Image alt="cart" src={CartIcon} />
         </li>
 
-        <li>
+        <li className="cursor-pointer">
           <Image alt="search" src={SearchIcon} />
         </li>
       </ul>
