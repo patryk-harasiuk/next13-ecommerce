@@ -6,7 +6,7 @@ import CartIcon from '@/public/assets/icons/cart.svg';
 import UserIcon from '@/public/assets/icons/user.svg';
 
 const Navbar = (): JSX.Element => (
-  <header className="navbar sticky top-0 left-0 z-50 bg-white h-20 w-full flex items-start lg:items-center justify-between py-4 px-5 border-b border-black">
+  <header className="navbar fixed left-0 z-50 bg-white h-20 w-full flex items-start lg:items-center justify-between py-4 px-5 border-b border-black">
     <div className="dropdown lg:hidden">
       <label tabIndex={0} className="lg:hidden">
         <HamburgerMenu />

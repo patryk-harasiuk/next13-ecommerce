@@ -7,7 +7,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <head />
 
-      <body className="font-sans">
+      <body className="font-sans relative">
         <Navbar />
 
         <main className="overflow-x-clip min-h-full min-w-full">{children}</main>

@@ -1,6 +1,6 @@
 'use client';
 
-import SignupForm from '../SigupForm';
+import SignupForm from 'features/auth/components/SigupForm';
 
 const Signup = (): JSX.Element => {
   const handleSubmitData = () => console.log('submitted');
