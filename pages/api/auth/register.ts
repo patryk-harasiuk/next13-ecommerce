@@ -1,13 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import * as z from 'zod';
 import prisma from '@/utils/client';
-import { createHash } from 'crypto';
-
-type RegisterUserDTO = {
-  name: string;
-  email: string;
-  password: string;
-};
+import { createHash } from '@/utils/createHash';
 
 const UserRegisterData = z.object({
   name: z.string(),
@@ -27,10 +21,10 @@ export default async function register(req: NextApiRequest, res: NextApiResponse
       return res.status(400);
     }
 
-    const hashedPassword = createHash(body.password);
+    const hashedPassword = await createHash(body.password);
 
     const createdUser = await prisma.user.create({
-      data: { ...body, hashedPassword },
+      data: { ...body, password: hashedPassword },
     });
 
     res.status(200).json(createdUser);
