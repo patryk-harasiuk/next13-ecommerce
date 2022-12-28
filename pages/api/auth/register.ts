@@ -2,6 +2,8 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import * as z from 'zod';
 import prisma from '@/utils/client';
 import { createHash } from '@/utils/createHash';
+import { DATABASE_ERROR_CODES } from 'shared';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 
 const UserRegisterData = z.object({
   name: z.string(),
@@ -18,7 +20,7 @@ export default async function register(req: NextApiRequest, res: NextApiResponse
     const { success } = UserRegisterData.safeParse(body);
 
     if (!success) {
-      return res.status(400);
+      return res.status(400).json({ message: 'Some field needs correction...' });
     }
 
     const hashedPassword = await createHash(body.password);
@@ -29,6 +31,15 @@ export default async function register(req: NextApiRequest, res: NextApiResponse
 
     res.status(200).json(createdUser);
   } catch (error) {
+    console.log(error, 'error');
+
+    if (
+      error instanceof PrismaClientKnownRequestError &&
+      error.code === DATABASE_ERROR_CODES.UNIQUE_VIOLATION
+    ) {
+      return res.status(400).json({ message: 'User with that email already exists' });
+    }
+
     res.status(400).json({ message: 'Could not create user' });
   }
 }
