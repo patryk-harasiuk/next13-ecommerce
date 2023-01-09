@@ -1,8 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import * as z from 'zod';
-import prisma from '@/utils/client';
-import * as bcrypt from 'bcrypt';
-import { decodeToken, generateAccessToken } from 'lib';
+import { decodeToken, generateRefreshToken, generateTokenPair } from 'lib';
 
 const UserLoginData = z.object({
   email: z.string(),
@@ -11,34 +9,31 @@ const UserLoginData = z.object({
 
 type UserLoginData = z.TypeOf<typeof UserLoginData>;
 
-export default async function login(req: NextApiRequest, res: NextApiResponse) {
+export default async function signin(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const token = generateAccessToken('1');
+    const { body } = req;
 
-    // const { body } = req;
+    const userLoginSchema = UserLoginData.safeParse(body);
 
-    // const { success } = UserLoginData.safeParse(body);
+    if (!userLoginSchema.success) {
+      return res.status(400).json({ message: 'Some field needs correction...' });
+    }
 
-    // if (!success) {
-    //   return res.status(400).json({ message: 'Some field needs correction...' });
-    // }
+    const { email, password } = userLoginSchema.data;
 
-    // const foundUser = await prisma.user.findUnique({
-    //   where: {
-    //     email: body.email,
-    //   },
-    // });
+    const to = generateRefreshToken('1');
 
-    // if (foundUser) {
-    //   await bcrypt.compare(body.password, foundUser.password);
-    // } else {
-    //   res.status(400).json('Invalid credentials');
-    // }
+    decodeToken(to.refreshToken, 'refresh');
 
-    // // token logic here
+    // const { accessTokenCookie, refreshTokenCookie } = await generateTokenPair(email, password);
 
+    // res.setHeader('Set-Cookie', [accessTokenCookie, refreshTokenCookie]);
     res.status(200).json('Logged in');
   } catch (error) {
+    if (error instanceof Error) {
+      return res.status(400).json({ message: error.message });
+    }
+
     res.status(400).json({ message: 'Could not log in' });
   }
 }
