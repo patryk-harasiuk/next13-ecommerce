@@ -22,6 +22,10 @@ body {
     Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+[data-nextjs-scroll-focus-boundary] {
+  display: contents;
+}
+
 img,
 picture,
 video,
@@ -50,4 +54,5 @@ h6 {
 
 #__next {
   isolation: isolate;
+  height: 100%;
 }
