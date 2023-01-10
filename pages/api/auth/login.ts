@@ -1,8 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import * as z from 'zod';
-import { getEnv } from 'utils';
+import { createCookiePair } from 'utils';
 import { login } from 'lib';
-import { serialize } from 'cookie';
 
 const UserLoginData = z.object({
   email: z.string(),
@@ -25,21 +24,7 @@ export default async function signin(req: NextApiRequest, res: NextApiResponse) 
 
     const { accessToken, refreshToken } = await login(email, password);
 
-    const accessTokenCookie = serialize('access', accessToken, {
-      maxAge: 60 * 60,
-      httpOnly: true,
-      secure: getEnv('ENV') === 'production',
-      path: '/',
-      sameSite: 'lax',
-    });
-
-    const refreshTokenCookie = serialize('refresh', refreshToken, {
-      maxAge: 60 * 60 * 720,
-      httpOnly: true,
-      secure: getEnv('ENV') === 'production',
-      path: '/',
-      sameSite: 'lax',
-    });
+    const { accessTokenCookie, refreshTokenCookie } = createCookiePair(accessToken, refreshToken);
 
     res.setHeader('set-cookie', [accessTokenCookie, refreshTokenCookie]);
     res.status(200).json('Logged in');
