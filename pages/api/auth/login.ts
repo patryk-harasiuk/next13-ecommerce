@@ -1,6 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import * as z from 'zod';
-import { decodeToken, generateRefreshToken } from 'utils';
+import { getEnv } from 'utils';
+import { login } from 'lib';
+import { serialize } from 'cookie';
 
 const UserLoginData = z.object({
   email: z.string(),
@@ -21,29 +23,25 @@ export default async function signin(req: NextApiRequest, res: NextApiResponse) 
 
     const { email, password } = userLoginSchema.data;
 
-    const to = generateRefreshToken('1');
+    const { accessToken, refreshToken } = await login(email, password);
 
-    decodeToken(to.refreshToken, 'refresh');
+    const accessTokenCookie = serialize('access', accessToken, {
+      maxAge: 60 * 60,
+      httpOnly: true,
+      secure: getEnv('ENV') === 'production',
+      path: '/',
+      sameSite: 'lax',
+    });
 
-    // const cookie = serialize('access', accessToken, {
-    //   maxAge: 60 * 60,
-    //   httpOnly: true,
-    //   secure: getEnv('ENV') === 'production',
-    //   path: '/',
-    //   sameSite: 'lax',
-    // });
+    const refreshTokenCookie = serialize('refresh', refreshToken, {
+      maxAge: 60 * 60 * 720,
+      httpOnly: true,
+      secure: getEnv('ENV') === 'production',
+      path: '/',
+      sameSite: 'lax',
+    });
 
-    // const cookie = serialize('refresh', refreshToken, {
-    //   maxAge: 60 * 60 * 720,
-    //   httpOnly: true,
-    //   secure: getEnv('ENV') === 'production',
-    //   path: '/',
-    //   sameSite: 'lax',
-    // });
-
-    // const { accessTokenCookie, refreshTokenCookie } = await generateTokenPair(email, password);
-
-    // res.setHeader('Set-Cookie', [accessTokenCookie, refreshTokenCookie]);
+    res.setHeader('set-cookie', [accessTokenCookie, refreshTokenCookie]);
     res.status(200).json('Logged in');
   } catch (error) {
     if (error instanceof Error) {

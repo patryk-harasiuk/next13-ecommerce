@@ -1,9 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import * as z from 'zod';
 import prisma from '@/utils/client';
-import { createHash } from '@/utils/create-hash';
-import { DATABASE_ERROR_CODES } from 'shared';
-import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
+import { createHash } from '@/utils/password';
 import { isUniqueViolationError } from 'errors';
 
 const UserRegisterData = z.object({

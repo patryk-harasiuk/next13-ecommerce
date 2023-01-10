@@ -5,3 +5,9 @@ export const createHash = async (data: string): Promise<string> => {
 
   return hashedData;
 };
+
+export const comparePasswords = async (password: string, userPassword: string) => {
+  const match = await bcrypt.compare(password, userPassword);
+
+  return match;
+};

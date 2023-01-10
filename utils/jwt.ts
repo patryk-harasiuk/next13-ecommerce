@@ -4,6 +4,7 @@ import { getEnv } from './env';
 import { randomUUID } from 'crypto';
 import { TOKENS } from 'const';
 import { serialize } from 'cookie';
+import { hasDefinedProperty } from './has-defined-property';
 
 // I check for 'jti' and 'sub', because I will be using those properties
 
@@ -46,6 +47,14 @@ export const decodeTokenPayload = (token: string, tokenType: 'access' | 'refresh
   }
 
   return payload;
+};
+
+export const getDecodedTokenPayloadData = (payload: JwtPayload) => {
+  if (!hasDefinedProperty(payload, 'sub') || !hasDefinedProperty(payload, 'jti')) {
+    throw new Error('Invalid token');
+  }
+
+  return { sub: payload['sub'], jti: payload['jti'] };
 };
 
 const isRightType = (tokenData: jwt.Jwt, tokenType: 'access' | 'refresh'): boolean =>

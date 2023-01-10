@@ -1,10 +1,14 @@
-import * as bcrypt from 'bcrypt';
-import { decodeTokenPayload, decodeToken, createTokenPair } from 'utils';
+import {
+  decodeTokenPayload,
+  decodeToken,
+  createTokenPair,
+  getDecodedTokenPayloadData,
+  comparePasswords,
+} from 'utils';
 import prisma from '@/utils/client';
 import { TOKENS } from 'const';
 import { findUserByEmail } from './user';
-import { JwtPayload } from 'jsonwebtoken';
-import { hasDefinedProperty, isJWTPayload } from '../utils';
+import { isJWTPayload } from '../utils';
 
 export const login = async (email: string, password: string) => {
   const foundUser = await findUserByEmail(email);
@@ -23,7 +27,7 @@ export const login = async (email: string, password: string) => {
     throw new Error('Invalid refresh token');
   }
 
-  const jti = getDecodedTokenPayloadData(payload, 'jti');
+  const jti = getDecodedTokenPayloadData(payload)['jti'];
 
   await prisma.refreshToken.create({
     data: {
@@ -38,37 +42,24 @@ export const login = async (email: string, password: string) => {
 export const refreshTokenPair = async (currentRefreshToken: string) => {
   const payload = decodeTokenPayload(currentRefreshToken, TOKENS.REFRESH);
 
-  const jti = getDecodedTokenPayloadData(payload, 'jti');
-  const sub = getDecodedTokenPayloadData(payload, 'sub');
+  const tokenPayload = getDecodedTokenPayloadData(payload);
 
-  const { accessToken, refreshToken } = await createTokenPair(sub);
+  const tokenPair = await createTokenPair(tokenPayload['sub']);
 
   await prisma.refreshToken.delete({
     where: {
-      jti,
+      jti: tokenPayload['jti'],
     },
   });
 
-  const newPayload = decodeTokenPayload(refreshToken, TOKENS.REFRESH);
+  const newPayload = decodeTokenPayload(tokenPair.refreshToken, TOKENS.REFRESH);
 
   await prisma.refreshToken.create({
     data: {
-      userId: sub,
-      jti: getDecodedTokenPayloadData(newPayload, 'jti'),
+      userId: tokenPayload['sub'],
+      jti: getDecodedTokenPayloadData(newPayload)['jti'],
     },
   });
-};
 
-const comparePasswords = async (password: string, userPassword: string) => {
-  const match = await bcrypt.compare(password, userPassword);
-
-  return match;
-};
-
-const getDecodedTokenPayloadData = (payload: JwtPayload, payloadProperty: 'sub' | 'jti') => {
-  if (!hasDefinedProperty(payload, payloadProperty)) {
-    throw new Error('Invalid token');
-  }
-
-  return payload[payloadProperty];
+  return tokenPair;
 };
