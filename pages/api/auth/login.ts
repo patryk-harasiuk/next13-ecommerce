@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import * as z from 'zod';
-import { decodeToken, generateRefreshToken, generateTokenPair } from 'lib';
+import { decodeToken, generateRefreshToken } from 'utils';
 
 const UserLoginData = z.object({
   email: z.string(),
@@ -24,6 +24,22 @@ export default async function signin(req: NextApiRequest, res: NextApiResponse) 
     const to = generateRefreshToken('1');
 
     decodeToken(to.refreshToken, 'refresh');
+
+    // const cookie = serialize('access', accessToken, {
+    //   maxAge: 60 * 60,
+    //   httpOnly: true,
+    //   secure: getEnv('ENV') === 'production',
+    //   path: '/',
+    //   sameSite: 'lax',
+    // });
+
+    // const cookie = serialize('refresh', refreshToken, {
+    //   maxAge: 60 * 60 * 720,
+    //   httpOnly: true,
+    //   secure: getEnv('ENV') === 'production',
+    //   path: '/',
+    //   sameSite: 'lax',
+    // });
 
     // const { accessTokenCookie, refreshTokenCookie } = await generateTokenPair(email, password);
 

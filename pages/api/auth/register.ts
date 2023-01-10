@@ -4,6 +4,7 @@ import prisma from '@/utils/client';
 import { createHash } from '@/utils/create-hash';
 import { DATABASE_ERROR_CODES } from 'shared';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
+import { isUniqueViolationError } from 'errors';
 
 const UserRegisterData = z.object({
   name: z.string(),
@@ -33,10 +34,7 @@ export default async function register(req: NextApiRequest, res: NextApiResponse
 
     res.status(200).json(createdUser);
   } catch (error) {
-    if (
-      error instanceof PrismaClientKnownRequestError &&
-      error.code === DATABASE_ERROR_CODES.UNIQUE_VIOLATION
-    ) {
+    if (isUniqueViolationError(error)) {
       return res.status(400).json({ message: 'User with that email already exists' });
     }
 
