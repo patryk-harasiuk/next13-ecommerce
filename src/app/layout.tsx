@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google';
 
 import Footer from './Footer';
 import Navbar from './Navbar';
+import Providers from './providers';
 import SuperHeader from './SuperHeader';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -17,14 +18,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={inter.className}>
-        <SuperHeader />
-        <Navbar />
+        <Providers>
+          <SuperHeader />
+          <Navbar />
 
-        <main className="min-h-full min-w-full overflow-x-clip px-8 py-12 md:py-16">
-          {children}
-        </main>
+          <main className="min-h-full min-w-full overflow-x-clip px-8 py-12 md:py-16">
+            {children}
+          </main>
 
-        <Footer />
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
