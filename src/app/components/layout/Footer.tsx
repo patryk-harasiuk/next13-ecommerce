@@ -2,7 +2,7 @@ import Image from 'next/image';
 import FooterEarthImage from 'public/assets/images/footer-earth-image.png';
 
 const Footer = (): JSX.Element => (
-  <footer className="bg-deep-purple mt-24 px-6 pt-16 text-white">
+  <footer className="mt-24 bg-deep-purple px-6 pt-16 text-white">
     <div className="relative flex w-full gap-14">
       <ul className="flex flex-col gap-4">
         <li>Product 1</li>

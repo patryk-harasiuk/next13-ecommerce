@@ -1,16 +1,18 @@
+'use client';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import * as z from 'zod';
 
 import PrimaryButton from '@/components/Buttons/PrimaryButton';
-import ErrorBox from '@/components/form/ErrorBox';
-import TextInput from '@/components/form/TextInput';
+import ErrorBox from '@/components/Form/ErrorBox';
+import TextInput from '@/components/Form/TextInput';
 
-import { login } from '../api/login';
+// import { login } from '../api/login';
 
 type LoginInputs = {
   email: string;
@@ -23,11 +25,13 @@ const schema = z.object({
 });
 
 const LoginForm = (): JSX.Element => {
+  const searchParams = useSearchParams();
   const router = useRouter();
   const [error, setError] = useState<string>('');
 
-  const returnUrl =
-    Object.keys(router.query).length === 0 ? '/' : (router.query.return_url as string);
+  const returnUrlParam = searchParams.get('return_url');
+
+  const returnUrl = returnUrlParam ?? '/';
 
   const {
     handleSubmit,
@@ -41,7 +45,7 @@ const LoginForm = (): JSX.Element => {
     try {
       setError('');
 
-      await login(values);
+      //   await login(values);
 
       router.push(returnUrl);
     } catch {

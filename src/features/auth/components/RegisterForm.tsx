@@ -1,6 +1,8 @@
+'use client';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
@@ -10,7 +12,7 @@ import PrimaryButton from '@/components/Buttons/PrimaryButton';
 import ErrorBox from '@/components/Form/ErrorBox';
 import TextInput from '@/components/Form/TextInput';
 
-import { register as registerUser } from '../api/register';
+// import { register as registerUser } from '../api/register';
 
 type RegisterInputs = {
   email: string;
@@ -51,12 +53,9 @@ const RegisterForm = (): JSX.Element => {
     try {
       setError('');
 
-      await registerUser(values);
+      //   await registerUser(values);
 
-      router.push({
-        pathname: '/auth/login',
-        query: null,
-      });
+      router.push('/auth/login');
     } catch {
       //   if (error instanceof ResponseError) return setError(error.message);
 

@@ -7,7 +7,7 @@ import UnstyledButton from '@/components/UnstyledButton';
 import VisuallyHidden from '@/components/VisuallyHidden';
 
 const SuperHeader = () => (
-  <div className="bg-gray-dark hidden h-10 items-center justify-end gap-6 pl-8 pr-8 text-sm text-gray-400 md:flex ">
+  <div className="hidden h-10 items-center justify-end gap-6 bg-gray-dark pl-8 pr-8 text-sm text-gray-400 md:flex ">
     <Link href="/account">
       <Image alt="user" src={UserIcon} width="20" height="20" />
     </Link>
