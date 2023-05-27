@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import RegisterForm from '@/features/auth/components/RegisterForm';
 
-const Page = () => {
+const RegisterPage = () => {
   const CompanyLogo = '/assets/images/company-logo.svg';
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -18,4 +18,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default RegisterPage;
