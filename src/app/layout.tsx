@@ -1,13 +1,24 @@
 import './globals.css';
 
-import { Inter } from 'next/font/google';
+import { Inter as FontSans } from 'next/font/google';
+import localFont from 'next/font/local';
+
+import { cn } from '@/utils/cn';
 
 import Footer from './components/layout/Footer';
 import Navbar from './components/layout/Navbar';
 import Providers from './components/layout/Providers';
 import SuperHeader from './components/layout/SuperHeader';
 
-const inter = Inter({ subsets: ['latin'] });
+const fontSans = FontSans({
+  subsets: ['latin'],
+  variable: '--font-sans',
+});
+
+const fontHeading = localFont({
+  src: '../assets/fonts/CalSans-SemiBold.woff2',
+  variable: '--font-heading',
+});
 
 export const metadata = {
   title: 'Next13 - eCommerce 🛒',
@@ -17,7 +28,13 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body
+        className={cn(
+          'bg-background min-h-screen font-sans antialiased',
+          fontSans.variable,
+          fontHeading.variable,
+        )}
+      >
         <Providers>
           <SuperHeader />
           <Navbar />

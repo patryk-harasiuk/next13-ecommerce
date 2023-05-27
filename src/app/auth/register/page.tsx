@@ -1,6 +1,12 @@
+import { Metadata } from 'next';
 import Image from 'next/image';
 
 import RegisterForm from '@/features/auth/components/RegisterForm';
+
+export const metadata: Metadata = {
+  title: 'Create an account',
+  description: 'Create an account to get started',
+};
 
 const RegisterPage = () => {
   const CompanyLogo = '/assets/images/company-logo.svg';
