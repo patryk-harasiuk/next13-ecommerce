@@ -1,6 +1,6 @@
 import { Prisma, PrismaClient, User } from '@prisma/client';
 
-import prisma from '@/utils/prisma-client';
+import prisma from '@/lib/prisma-client';
 
 type UserRegisterType = {
   email: string;

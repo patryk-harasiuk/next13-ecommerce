@@ -1,6 +1,6 @@
 import z from 'zod';
 
-import { userSchema } from '@/features/auth/schema';
+import { userSchema } from '@/lib/validations/auth';
 
 type Props = { user: z.infer<typeof userSchema> };
 
