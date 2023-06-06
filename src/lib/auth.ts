@@ -18,6 +18,7 @@ export const authOptions: NextAuthOptions = {
 
       async authorize(credentials) {
         if (!credentials?.email || !credentials.password) {
+          console.log('am i here');
           return null;
         }
 
@@ -26,6 +27,8 @@ export const authOptions: NextAuthOptions = {
             email: credentials.email,
           },
         });
+
+        console.log(user, 'user');
 
         if (!user || !(await compare(credentials.password, user.password))) {
           return null;
@@ -66,6 +69,6 @@ export const authOptions: NextAuthOptions = {
   },
   adapter: PrismaAdapter(prisma),
   pages: {
-    signIn: '/auth/login',
+    signIn: '/login',
   },
 };

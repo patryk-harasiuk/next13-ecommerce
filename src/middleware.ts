@@ -7,12 +7,11 @@ export default withAuth(
     const token = await getToken({ req });
     const isAuth = !!token;
     const isAuthPage =
-      req.nextUrl.pathname.startsWith('/auth/login') ||
-      req.nextUrl.pathname.startsWith('/auth/register');
+      req.nextUrl.pathname.startsWith('/login') || req.nextUrl.pathname.startsWith('/register');
 
     if (isAuthPage) {
       if (isAuth) {
-        return NextResponse.redirect(new URL('/profile', req.url));
+        return NextResponse.redirect(new URL('/', req.url));
       }
 
       return null;

@@ -2,6 +2,8 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import { signIn } from 'next-auth/react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
@@ -17,8 +19,8 @@ type LoginInputs = {
 };
 
 const schema = z.object({
-  email: z.string().min(1, 'Email is required'),
-  password: z.string().min(8, 'Password is required'),
+  email: z.string({ required_error: 'Email is required' }).min(1, 'Email is too short'),
+  password: z.string({ required_error: 'Password is required' }).min(8, 'Password is too short'),
 });
 
 const LoginForm = (): JSX.Element => {
@@ -32,14 +34,47 @@ const LoginForm = (): JSX.Element => {
     resolver: zodResolver(schema),
   });
 
+  const searchParams = useSearchParams();
+
+  // async function onSubmit(data: FormData) {
+  //   setIsLoading(true)
+
+  //   const signInResult = await signIn("email", {
+  //     email: data.email.toLowerCase(),
+  //     redirect: false,
+  //     callbackUrl: searchParams?.get("from") || "/dashboard",
+  //   })
+
+  //   setIsLoading(false)
+
+  //   if (!signInResult?.ok) {
+  //     return toast({
+  //       title: "Something went wrong.",
+  //       description: "Your sign in request failed. Please try again.",
+  //       variant: "destructive",
+  //     })
+  //   }
+
+  //   return toast({
+  //     title: "Check your email",
+  //     description: "We sent you a login link. Be sure to check your spam too.",
+  //   })
+  // }
+
   const onSubmit = async (values: LoginInputs) => {
     try {
       setError('');
 
-      //   await login(values);
-    } catch {
-      //   if (error instanceof AxiosError) return setError(error.message);
+      const signInResult = await signIn('credentials', {
+        redirect: false,
+        callbackUrl: searchParams?.get('from') || '/',
+        ...values,
+      });
 
+      console.log(signInResult, 'singnin');
+
+      if (signInResult?.error === 'CredentialsSignin') setError('Email or password is wrong');
+    } catch {
       toast.error('Unexpected error, please try again', {
         position: toast.POSITION.TOP_RIGHT,
       });

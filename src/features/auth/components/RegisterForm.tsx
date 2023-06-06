@@ -21,10 +21,12 @@ type RegisterInputs = {
 
 const schema = z
   .object({
-    email: z.string().min(1, 'Email is required'),
-    name: z.string().min(1, 'Name is required'),
-    password: z.string().min(8, 'Password is required'),
-    confirmPassword: z.string().min(8, 'Password is required'),
+    email: z.string({ required_error: 'Email is required' }).min(1, 'Email is too short'),
+    name: z.string({ required_error: 'Name is required' }).min(1, 'Name is too short'),
+    password: z.string({ required_error: 'Password is required' }).min(8, 'Password is too short'),
+    confirmPassword: z
+      .string({ required_error: 'Password is required' })
+      .min(8, 'Password is too short'),
   })
   .superRefine(({ confirmPassword, password }, ctx) => {
     if (confirmPassword !== password) {
@@ -53,7 +55,7 @@ const RegisterForm = (): JSX.Element => {
 
       //   await registerUser(values);
 
-      router.push('/auth/login');
+      router.push('/login');
     } catch {
       //   if (error instanceof ResponseError) return setError(error.message);
 
