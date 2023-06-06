@@ -12,8 +12,6 @@ import PrimaryButton from '@/components/Buttons/PrimaryButton';
 import ErrorBox from '@/components/Form/ErrorBox';
 import TextInput from '@/components/Form/TextInput';
 
-// import { register as registerUser } from '../api/register';
-
 type RegisterInputs = {
   email: string;
   name: string;

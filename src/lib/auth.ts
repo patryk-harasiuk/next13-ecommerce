@@ -10,7 +10,7 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: 'Sign in to your account',
       type: 'credentials',
-
+      id: 'credentials',
       credentials: {
         email: { label: 'Email', type: 'text' },
         password: { label: 'Password', type: 'password' },
@@ -51,10 +51,10 @@ export const authOptions: NextAuthOptions = {
     },
     jwt: ({ token, user }) => {
       if (user) {
-        const u = user;
+        const { id } = user;
         return {
           ...token,
-          id: u.id,
+          id,
         };
       }
       return token;
@@ -62,9 +62,10 @@ export const authOptions: NextAuthOptions = {
   },
   session: {
     strategy: 'jwt',
+    maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   adapter: PrismaAdapter(prisma),
   pages: {
-    signIn: '/login',
+    signIn: '/auth/login',
   },
 };

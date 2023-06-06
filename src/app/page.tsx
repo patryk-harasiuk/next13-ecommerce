@@ -1,5 +1,8 @@
+'use client';
+
 import Image from 'next/image';
+import { signIn } from 'next-auth/react';
 
 export default function Home() {
-  return <div>DIV</div>;
+  return <button onClick={() => signIn('credentials')}>SIGNIN</button>;
 }
