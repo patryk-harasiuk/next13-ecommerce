@@ -36,31 +36,6 @@ const LoginForm = (): JSX.Element => {
 
   const searchParams = useSearchParams();
 
-  // async function onSubmit(data: FormData) {
-  //   setIsLoading(true)
-
-  //   const signInResult = await signIn("email", {
-  //     email: data.email.toLowerCase(),
-  //     redirect: false,
-  //     callbackUrl: searchParams?.get("from") || "/dashboard",
-  //   })
-
-  //   setIsLoading(false)
-
-  //   if (!signInResult?.ok) {
-  //     return toast({
-  //       title: "Something went wrong.",
-  //       description: "Your sign in request failed. Please try again.",
-  //       variant: "destructive",
-  //     })
-  //   }
-
-  //   return toast({
-  //     title: "Check your email",
-  //     description: "We sent you a login link. Be sure to check your spam too.",
-  //   })
-  // }
-
   const onSubmit = async (values: LoginInputs) => {
     try {
       setError('');
@@ -70,8 +45,6 @@ const LoginForm = (): JSX.Element => {
         callbackUrl: searchParams?.get('from') || '/',
         ...values,
       });
-
-      console.log(signInResult, 'singnin');
 
       if (signInResult?.error === 'CredentialsSignin') setError('Email or password is wrong');
     } catch {
@@ -101,7 +74,7 @@ const LoginForm = (): JSX.Element => {
 
       <p className="mt-6 text-center text-sm text-gray-600">
         Don&apos;t have an account yet?
-        <Link className="ml-1 font-bold text-indigo-600" href="/auth/register">
+        <Link className="ml-1 font-bold text-indigo-600" href="/register">
           Sign up
         </Link>
       </p>

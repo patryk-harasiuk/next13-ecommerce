@@ -11,6 +11,8 @@ import * as z from 'zod';
 import PrimaryButton from '@/components/Buttons/PrimaryButton';
 import ErrorBox from '@/components/Form/ErrorBox';
 import TextInput from '@/components/Form/TextInput';
+import { registerSchema } from '@/lib/validations/auth';
+import { fetcher } from '@/utils/fetcher';
 
 type RegisterInputs = {
   email: string;
@@ -53,7 +55,11 @@ const RegisterForm = (): JSX.Element => {
     try {
       setError('');
 
-      //   await registerUser(values);
+      await fetcher('/auth/register', {
+        method: 'POST',
+        schema: registerSchema,
+        body: values,
+      });
 
       router.push('/login');
     } catch {
