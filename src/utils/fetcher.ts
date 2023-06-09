@@ -24,7 +24,7 @@ export async function fetcher<Schema extends ZodSchema | null>(
   { method, schema, body, config }: RequestConfig<Schema>,
 ) {
   try {
-    const response = await fetch(process.env.NEXTAUTH_URL + url, {
+    const response = await fetch('/api' + url, {
       ...config,
       headers: {
         'Content-Type': 'application/json',
@@ -42,6 +42,8 @@ export async function fetcher<Schema extends ZodSchema | null>(
       const data = await response.json();
 
       schema.parse(data);
+
+      return data;
     }
     throw new ResponseError(response.statusText, response.status);
   } catch (error) {

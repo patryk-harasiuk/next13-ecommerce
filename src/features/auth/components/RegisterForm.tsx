@@ -55,15 +55,17 @@ const RegisterForm = (): JSX.Element => {
     try {
       setError('');
 
-      await fetcher('/auth/register', {
+      const user = await fetcher('/auth/register', {
         method: 'POST',
         schema: registerSchema,
         body: values,
       });
 
       router.push('/login');
-    } catch {
+    } catch (error) {
       //   if (error instanceof ResponseError) return setError(error.message);
+
+      console.log(error, 'eror');
 
       toast.error('Unexpected error, please try again', {
         position: toast.POSITION.TOP_RIGHT,
@@ -103,7 +105,7 @@ const RegisterForm = (): JSX.Element => {
         <Link
           className="ml-1 font-bold text-indigo-600"
           href={{
-            pathname: '/auth/login',
+            pathname: '/login',
             query: null,
           }}
         >
