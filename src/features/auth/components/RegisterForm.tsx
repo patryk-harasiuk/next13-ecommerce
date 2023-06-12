@@ -11,8 +11,6 @@ import * as z from 'zod';
 import PrimaryButton from '@/components/Buttons/PrimaryButton';
 import ErrorBox from '@/components/Form/ErrorBox';
 import TextInput from '@/components/Form/TextInput';
-import { registerSchema } from '@/lib/validations/auth';
-import { fetcher } from '@/utils/fetcher';
 
 type RegisterInputs = {
   email: string;
@@ -52,25 +50,29 @@ const RegisterForm = (): JSX.Element => {
   });
 
   const onSubmit = async (values: RegisterInputs) => {
-    try {
-      setError('');
+    setError('');
 
-      const user = await fetcher('/auth/register', {
-        method: 'POST',
-        schema: registerSchema,
-        body: values,
-      });
+    const response = await fetch('/api/auth/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(values),
+    });
 
-      router.push('/login');
-    } catch (error) {
-      //   if (error instanceof ResponseError) return setError(error.message);
+    if (!response.ok) {
+      if (response.status === 400) {
+        return setError('Account already exists');
+      }
 
-      console.log(error, 'eror');
-
-      toast.error('Unexpected error, please try again', {
-        position: toast.POSITION.TOP_RIGHT,
+      return toast.error('Something went wrong, please try again', {
+        position: 'top-right',
       });
     }
+
+    await response.json();
+
+    router.push('/login');
   };
 
   return (

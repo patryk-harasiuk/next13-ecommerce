@@ -32,7 +32,7 @@ export async function POST(request: Request) {
     }
 
     if (isAlreadyInDBError(error)) {
-      return NextResponse.json('User already exists', { status: HTTPCode.BAD_REQUEST });
+      return new Response(JSON.stringify({ message: 'User already exists' }), { status: 400 });
     }
 
     return NextResponse.json(null, { status: HTTPCode.INTERNAL_SERVER_ERROR });

@@ -23,33 +23,25 @@ export async function fetcher<Schema extends ZodSchema | null>(
   url: string,
   { method, schema, body, config }: RequestConfig<Schema>,
 ) {
-  try {
-    const response = await fetch('/api' + url, {
-      ...config,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      credentials: 'include',
-      method,
-      ...(body && { body: JSON.stringify(body) }),
-    });
+  const response = await fetch('/api' + url, {
+    ...config,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+    method,
+    ...(body && { body: JSON.stringify(body) }),
+  });
 
-    if (response.ok) {
-      if (!schema) {
-        return null;
-      }
-
-      const data = await response.json();
-
-      schema.parse(data);
-
-      return data;
+  if (response.ok) {
+    if (!schema) {
+      return null;
     }
-    throw new ResponseError(response.statusText, response.status);
-  } catch (error) {
-    if (error instanceof ResponseError) {
-      throw error;
-    }
-    throw new ResponseError('Something went wrong during fetching!');
+
+    const data = await response.json();
+
+    schema.parse(data);
+
+    return data;
   }
 }
