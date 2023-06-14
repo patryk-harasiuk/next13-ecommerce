@@ -37,7 +37,6 @@ const LoginForm = (): JSX.Element => {
   });
 
   const onSubmit = async (values: LoginInputs) => {
-    console.log(values, 'values');
     try {
       setError('');
 

@@ -1,5 +1,5 @@
-import Breadcrumbs from '@/components/Breadcrumbs';
-import Crumb from '@/components/Breadcrumbs/Crumb';
+import Breadcrumbs from '@/components/ui/Breadcrumbs';
+import Crumb from '@/components/ui/Breadcrumbs/Crumb';
 
 const ProductBreadcrumbs = () => {
   return (
