@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import CloseIcon from 'public/assets/icons/close.svg';
 
-import UnstyledButton from '@/components/UnstyledButton';
+import UnstyledButton from '@/components/ui/UnstyledButton';
 import VisuallyHidden from '@/components/VisuallyHidden';
 
 type Props = {

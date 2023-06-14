@@ -7,7 +7,7 @@ import CartIcon from 'public/assets/icons/shopping-bag.svg';
 import UserIcon from 'public/assets/icons/user.svg';
 import { useState } from 'react';
 
-import UnstyledButton from '@/components/UnstyledButton';
+import UnstyledButton from '@/components/ui/UnstyledButton';
 import VisuallyHidden from '@/components/VisuallyHidden';
 
 import MobileMenu from '../../MobileMenu';

@@ -8,9 +8,9 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import * as z from 'zod';
 
-import PrimaryButton from '@/components/Buttons/PrimaryButton';
-import ErrorBox from '@/components/Form/ErrorBox';
-import TextInput from '@/components/Form/TextInput';
+import PrimaryButton from '@/components/ui/Buttons/PrimaryButton';
+import ErrorBox from '@/components/ui/Form/ErrorBox';
+import TextInput from '@/components/ui/Form/TextInput';
 
 type RegisterInputs = {
   email: string;

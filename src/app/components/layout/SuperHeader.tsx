@@ -3,7 +3,7 @@ import Link from 'next/link';
 import CartIcon from 'public/assets/icons/shopping-bag.svg';
 import UserIcon from 'public/assets/icons/user.svg';
 
-import UnstyledButton from '@/components/UnstyledButton';
+import UnstyledButton from '@/components/ui/UnstyledButton';
 import VisuallyHidden from '@/components/VisuallyHidden';
 
 const SuperHeader = () => (
