@@ -2,7 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -24,6 +24,8 @@ const schema = z.object({
 });
 
 const LoginForm = (): JSX.Element => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [error, setError] = useState<string>('');
 
   const {
@@ -34,9 +36,8 @@ const LoginForm = (): JSX.Element => {
     resolver: zodResolver(schema),
   });
 
-  const searchParams = useSearchParams();
-
   const onSubmit = async (values: LoginInputs) => {
+    console.log(values, 'values');
     try {
       setError('');
 
@@ -46,7 +47,10 @@ const LoginForm = (): JSX.Element => {
         ...values,
       });
 
-      if (signInResult?.error === 'CredentialsSignin') setError('Email or password is wrong');
+      if (signInResult?.error === 'CredentialsSignin')
+        return setError('Email or password is wrong');
+
+      router.push('/');
     } catch {
       toast.error('Unexpected error, please try again', {
         position: toast.POSITION.TOP_RIGHT,

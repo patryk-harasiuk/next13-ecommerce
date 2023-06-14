@@ -30,6 +30,12 @@ export const authOptions: NextAuthOptions = {
 
         console.log(user, 'user');
 
+        console.log(credentials.password, 'creds pass');
+
+        if (!user) return null;
+
+        console.log(await compare(credentials.password, user.password), 'porownanko');
+
         if (!user || !(await compare(credentials.password, user.password))) {
           return null;
         }
