@@ -35,6 +35,9 @@ dependencies:
   bcrypt:
     specifier: ^5.1.0
     version: registry.npmjs.org/bcrypt@5.1.0
+  class-variance-authority:
+    specifier: ^0.6.0
+    version: registry.npmjs.org/class-variance-authority@0.6.0(typescript@5.0.4)
   clsx:
     specifier: ^1.2.1
     version: registry.npmjs.org/clsx@1.2.1
@@ -2113,6 +2116,26 @@ packages:
     version: 3.8.0
     engines: { node: '>=8' }
     dev: true
+
+  registry.npmjs.org/class-variance-authority@0.6.0(typescript@5.0.4):
+    resolution:
+      {
+        integrity: sha512-qdRDgfjx3GRb9fpwpSvn+YaidnT7IUJNe4wt5/SWwM+PmUwJUhQRk/8zAyNro0PmVfmen2635UboTjIBXXxy5A==,
+        registry: https://node.bit.dev/,
+        tarball: https://registry.npmjs.org/class-variance-authority/-/class-variance-authority-0.6.0.tgz,
+      }
+    id: registry.npmjs.org/class-variance-authority/0.6.0
+    name: class-variance-authority
+    version: 0.6.0
+    peerDependencies:
+      typescript: '>= 4.5.5 < 6'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      clsx: registry.npmjs.org/clsx@1.2.1
+      typescript: registry.npmjs.org/typescript@5.0.4
+    dev: false
 
   registry.npmjs.org/clean-regexp@1.0.0:
     resolution:
