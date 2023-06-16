@@ -10,7 +10,7 @@ import { useState } from 'react';
 import UnstyledButton from '@/components/ui/UnstyledButton';
 import VisuallyHidden from '@/components/VisuallyHidden';
 
-import MobileMenu from '../../MobileMenu';
+import MobileMenu from './MobileMenu';
 
 const Navbar = (): JSX.Element => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
