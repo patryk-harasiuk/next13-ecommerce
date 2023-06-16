@@ -21,6 +21,9 @@
     "*.js": "eslint --cache --fix",
     "*.{js,css,md}": "prettier --write"
   },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "dependencies": {
     "@hookform/resolvers": "^3.1.0",
     "@next-auth/prisma-adapter": "0.4.4-canary.81",
@@ -66,6 +69,7 @@
     "lint-staged": "^13.2.2",
     "postcss": "8.4.23",
     "prettier": "^2.8.8",
-    "prettier-plugin-tailwindcss": "^0.3.0"
+    "prettier-plugin-tailwindcss": "^0.3.0",
+    "ts-node": "^10.9.1"
   }
 }

@@ -2,12 +2,10 @@ import ProductCard from '@/components/ProductCard';
 import { Product } from '@/types';
 
 type Props = {
-  products: Product[] | undefined;
+  products: Product[];
 };
 
 const ProductsGrid = ({ products }: Props) => {
-  if (!products) return <div>No products</div>;
-
   return (
     <div className="flex flex-wrap gap-8">
       {products.map((product) => {

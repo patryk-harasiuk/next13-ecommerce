@@ -1,6 +1,8 @@
 'use client';
 
-import { PRODUCTS_MOCK } from '@/components/ProductCard/utils/test/queryProducts.mock';
+import { notFound } from 'next/navigation';
+
+import prisma from '@/lib/prisma-client';
 
 import Header from './components/page/Header';
 import LeftColumn from './components/page/LeftColumn';
@@ -9,8 +11,14 @@ import ProductBreadcrumbs from './components/page/ProductBreadcrumbs';
 import ProductsGrid from './components/page/ProductsGrid';
 import ProductsSidebar from './components/page/ProductsSidebar';
 
-export default function Home() {
-  const prodcuts = PRODUCTS_MOCK;
+async function getProducts() {
+  const products = await prisma.product.findMany();
+
+  return products;
+}
+
+export default async function Home() {
+  const products = await getProducts();
 
   return (
     <div className="flex flex-row-reverse gap-8 align-baseline">
@@ -21,8 +29,8 @@ export default function Home() {
           </div>
           <h2 className="text-2xl font-medium">Shirts</h2>
         </Header>
-
-        <ProductsGrid products={prodcuts} />
+        {/* @ts-expect-error Server Component */}
+        <ProductsGrid products={products} />
       </MainColumn>
       <LeftColumn>
         <div className="[display:none] md:block">

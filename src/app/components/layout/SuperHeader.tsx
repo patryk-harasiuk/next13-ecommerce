@@ -8,7 +8,7 @@ import VisuallyHidden from '@/components/VisuallyHidden';
 
 const SuperHeader = () => (
   <div className="hidden h-10 items-center justify-end gap-6 bg-gray-dark pl-8 pr-8 text-sm text-gray-400 md:flex ">
-    <Link href="/account">
+    <Link href="/profile">
       <Image alt="user" src={UserIcon} width="20" height="20" />
     </Link>
 
