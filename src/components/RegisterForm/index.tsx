@@ -8,9 +8,11 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import * as z from 'zod';
 
-import PrimaryButton from '@/components/ui/Buttons/PrimaryButton';
 import ErrorBox from '@/components/ui/Form/ErrorBox';
 import TextInput from '@/components/ui/Form/TextInput';
+import { cn } from '@/utils/cn';
+
+import { buttonVariants } from '../ui/Button';
 
 type RegisterInputs = {
   email: string;
@@ -99,7 +101,9 @@ const RegisterForm = (): JSX.Element => {
         error={errors.confirmPassword}
       />
 
-      <PrimaryButton type="submit">Sign up</PrimaryButton>
+      <button type="submit" className={cn(buttonVariants())}>
+        Sign up
+      </button>
       {error && <ErrorBox>{error}</ErrorBox>}
 
       <p className="mt-6 text-center text-sm text-gray-600">

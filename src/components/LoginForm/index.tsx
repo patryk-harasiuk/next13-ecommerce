@@ -9,9 +9,11 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import * as z from 'zod';
 
-import PrimaryButton from '@/components/ui/Buttons/PrimaryButton';
 import ErrorBox from '@/components/ui/Form/ErrorBox';
 import TextInput from '@/components/ui/Form/TextInput';
+import { cn } from '@/utils/cn';
+
+import { buttonVariants } from '../ui/Button';
 
 type LoginInputs = {
   email: string;
@@ -71,7 +73,9 @@ const LoginForm = (): JSX.Element => {
         error={errors.password}
       />
 
-      <PrimaryButton type="submit">Sign in</PrimaryButton>
+      <button className={cn(buttonVariants())} type="submit">
+        Sign in
+      </button>
 
       {error && <ErrorBox>{error}</ErrorBox>}
 

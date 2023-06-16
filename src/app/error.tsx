@@ -1,6 +1,7 @@
 'use client';
 
-import PrimaryButton from '@/components/ui/Buttons/PrimaryButton';
+import { buttonVariants } from '@/components/ui/Button';
+import { cn } from '@/utils/cn';
 
 type Props = {
   error: Error;
@@ -14,7 +15,9 @@ export default function Error({ error, reset }: Props) {
         <h2 className="mt-10 text-center text-xl font-bold leading-9 tracking-tight text-gray-900">
           Something went wrong!
         </h2>
-        <PrimaryButton onClick={reset}>Try Again</PrimaryButton>
+        <button className={cn(buttonVariants())} onClick={reset}>
+          Try Again
+        </button>
       </div>
     </div>
   );
