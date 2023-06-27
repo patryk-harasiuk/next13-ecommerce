@@ -17,7 +17,7 @@ model User {
   name         String
   email        String         @unique
   password     String
-  createdAt    DateTime       @default(now()) @map(name: "created_at") 
+  createdAt    DateTime       @default(now()) @map(name: "created_at")
 
   @@map(name: "users")
 }
@@ -28,4 +28,13 @@ model Product {
   name        String
   price       Decimal @db.Decimal(9,2)
   image       String
+  category    Category @default(tshirt)
+  createdAt    DateTime       @default(now()) @map(name: "created_at")
+}
+
+enum Category {
+  tshirt
+  knitwear
+  shoes
+  jeans
 }

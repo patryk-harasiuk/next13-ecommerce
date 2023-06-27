@@ -9,11 +9,11 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import * as z from 'zod';
 
-import ErrorBox from '@/components/ui/Form/ErrorBox';
-import TextInput from '@/components/ui/Form/TextInput';
+import TextInput from '@/components/ui/text-input';
 import { cn } from '@/utils/cn';
 
-import { buttonVariants } from '../ui/Button';
+import { buttonVariants } from '../ui/button';
+import ErrorBox from '../ui/error-box';
 
 type LoginInputs = {
   email: string;

@@ -1,7 +1,7 @@
 import { UseFormRegisterReturn } from 'react-hook-form';
 
-import FieldWrapper from '../FieldWrapper';
-import type { SanitizedFieldWrapperProps } from '../types';
+import type { SanitizedFieldWrapperProps } from './field-wrapper';
+import FieldWrapper from './field-wrapper';
 
 type TextInputProps = SanitizedFieldWrapperProps & {
   type: 'text' | 'password' | 'email';

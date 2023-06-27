@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import LoginForm from '@/components/LoginForm';
+import LoginForm from '@/components/forms/login-form';
 
 const CompanyLogo = '/assets/images/company-logo.svg';
 

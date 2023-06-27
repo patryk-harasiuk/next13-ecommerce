@@ -1,5 +1,6 @@
 'use client';
 
+import { User } from '@prisma/client';
 import Image from 'next/image';
 import Link from 'next/link';
 import HamburgerMenu from 'public/assets/icons/menu.svg';
@@ -7,12 +8,18 @@ import CartIcon from 'public/assets/icons/shopping-bag.svg';
 import UserIcon from 'public/assets/icons/user.svg';
 import { useState } from 'react';
 
-import UnstyledButton from '@/components/ui/UnstyledButton';
-import VisuallyHidden from '@/components/VisuallyHidden';
+import { cn } from '@/utils/cn';
 
-import MobileMenu from './MobileMenu';
+import { buttonVariants } from '../ui/button';
+import UnstyledButton from '../ui/unstyled-button';
+import VisuallyHidden from '../visually-hidden';
+import MobileMenu from './mobile-menu';
 
-const Navbar = (): JSX.Element => {
+type Props = {
+  user: Pick<User, 'email' | 'name'> | null;
+};
+
+export function SiteHeader({ user }: Props) {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   return (
@@ -47,9 +54,15 @@ const Navbar = (): JSX.Element => {
       </nav>
 
       <div className="flex gap-8 md:hidden">
-        <Link href="/account">
-          <Image alt="user" src={UserIcon} width="20" height="20" />
-        </Link>
+        {user ? (
+          <Link href="/login" className={cn(buttonVariants({ variant: 'link' }))}>
+            Sign in
+          </Link>
+        ) : (
+          <Link href="/account">
+            <Image alt="user" src={UserIcon} width="20" height="20" />
+          </Link>
+        )}
 
         <UnstyledButton>
           <Image alt="cart" src={CartIcon} width="20" height="20" />
@@ -67,6 +80,6 @@ const Navbar = (): JSX.Element => {
       <div className="hidden md:flex md:flex-1" />
     </header>
   );
-};
+}
 
-export default Navbar;
+export default SiteHeader;

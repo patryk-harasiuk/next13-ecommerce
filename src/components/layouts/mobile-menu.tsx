@@ -3,8 +3,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import CloseIcon from 'public/assets/icons/close.svg';
 
-import UnstyledButton from '@/components/ui/UnstyledButton';
-import VisuallyHidden from '@/components/VisuallyHidden';
+import UnstyledButton from '@/components/ui/unstyled-button';
+import VisuallyHidden from '@/components/visually-hidden';
 
 type Props = {
   isOpen: boolean;

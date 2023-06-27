@@ -1,7 +1,16 @@
-import ErrorBox from '../ErrorBox';
-import type { FieldWrapperType } from '../types';
+import { FieldError } from 'react-hook-form';
+
+import ErrorBox from './error-box';
 
 type FieldWrapperProps = FieldWrapperType;
+
+export type FieldWrapperType = {
+  children: React.ReactNode;
+  label?: string;
+  error?: FieldError;
+};
+
+export type SanitizedFieldWrapperProps = Omit<FieldWrapperType, 'children'>;
 
 const FieldWrapper = ({ children, label, error }: FieldWrapperProps): JSX.Element => (
   <div className="mb-4">
