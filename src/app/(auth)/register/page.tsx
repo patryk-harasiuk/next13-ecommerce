@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const RegisterPage = () => (
   <Shell layout="auth">
     <Card>
-      <CardHeader className="space-y-1">
+      <CardHeader className="">
         <CardTitle className="text-2xl">Sign up</CardTitle>
         <CardDescription>Sign up to your account</CardDescription>
       </CardHeader>

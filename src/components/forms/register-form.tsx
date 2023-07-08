@@ -3,15 +3,15 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import * as z from 'zod';
 
 import TextInput from '@/components/ui/text-input';
-import { cn } from '@/utils/cn';
 
-import { buttonVariants } from '../ui/button';
+import { Icons } from '../icon';
+import { Button } from '../ui/button';
 import ErrorBox from '../ui/error-box';
 
 type RegisterInputs = {
@@ -42,6 +42,7 @@ const schema = z
 const RegisterForm = (): JSX.Element => {
   const router = useRouter();
   const [error, setError] = useState<string>('');
+  const [isPending, startTransition] = useTransition();
 
   const {
     handleSubmit,
@@ -51,34 +52,38 @@ const RegisterForm = (): JSX.Element => {
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = async (values: RegisterInputs) => {
+  const onSubmit = (values: RegisterInputs) => {
     setError('');
 
-    const response = await fetch('/api/auth/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(values),
-    });
+    startTransition(async () => {
+      const response = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      });
 
-    if (!response.ok) {
-      if (response.status === 400) {
-        return setError('Account already exists');
+      if (!response.ok) {
+        if (response.status === 400) {
+          return setError('Account already exists');
+        }
+
+        toast.error('Something went wrong, please try again', {
+          position: 'top-right',
+        });
+
+        return;
       }
 
-      return toast.error('Something went wrong, please try again', {
-        position: 'top-right',
-      });
-    }
+      await response.json();
 
-    await response.json();
-
-    router.push('/login');
+      router.push('/login');
+    });
   };
 
   return (
-    <form method="POST" onSubmit={handleSubmit(onSubmit)} className="mb-4 px-8 pb-8 pt-6">
+    <form method="POST" onSubmit={handleSubmit(onSubmit)} className="mb-4 pb-8 pt-6">
       <TextInput type="text" registration={register('name')} label="Name" error={errors.name} />
 
       <TextInput type="email" registration={register('email')} label="Email" error={errors.email} />
@@ -97,15 +102,17 @@ const RegisterForm = (): JSX.Element => {
         error={errors.confirmPassword}
       />
 
-      <button type="submit" className={cn(buttonVariants())}>
+      <Button type="submit" disabled={isPending} className="mt-4 w-full">
+        {isPending && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" />}
         Sign up
-      </button>
+      </Button>
+
       {error && <ErrorBox>{error}</ErrorBox>}
 
-      <p className="mt-6 text-center text-sm text-gray-600">
+      <p className="mt-6 text-center text-sm text-muted-foreground">
         Already have an account?
         <Link
-          className="ml-1 font-bold text-indigo-600"
+          className="ml-1 font-bold text-primary"
           href={{
             pathname: '/login',
             query: null,
