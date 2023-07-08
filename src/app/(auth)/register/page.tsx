@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 
 import RegisterForm from '@/components/forms/register-form';
+import Shell from '@/components/shell';
 
 export const metadata: Metadata = {
   title: 'Create an account',
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
 const CompanyLogo = '/assets/images/company-logo.svg';
 
 const RegisterPage = () => (
-  <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+  <Shell layout="auth">
     <div className="sm:mx-auto sm:w-full sm:max-w-sm">
       <Image width={30} height={10} className="mx-auto" src={CompanyLogo} alt="Company logo" />
       <h2 className="my-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
@@ -19,7 +20,7 @@ const RegisterPage = () => (
 
       <RegisterForm />
     </div>
-  </div>
+  </Shell>
 );
 
 export default RegisterPage;
