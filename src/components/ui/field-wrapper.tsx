@@ -2,19 +2,21 @@ import { FieldError } from 'react-hook-form';
 
 import ErrorBox from './error-box';
 
-type FieldWrapperProps = FieldWrapperType;
+type FieldWrapperProps = Props;
 
-export type FieldWrapperType = {
+export type Props = {
   children: React.ReactNode;
   label?: string;
   error?: FieldError;
 };
 
-export type SanitizedFieldWrapperProps = Omit<FieldWrapperType, 'children'>;
+export type SanitizedFieldWrapperProps = Omit<Props, 'children'>;
 
 const FieldWrapper = ({ children, label, error }: FieldWrapperProps): JSX.Element => (
   <div className="mb-4">
-    <label className="mb-2 block text-sm font-bold text-gray-700">{label}</label>
+    <label className="mb-3 block text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+      {label}
+    </label>
 
     {children}
     {error?.message && <ErrorBox>{error.message}</ErrorBox>}

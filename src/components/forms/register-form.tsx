@@ -78,11 +78,7 @@ const RegisterForm = (): JSX.Element => {
   };
 
   return (
-    <form
-      method="POST"
-      onSubmit={handleSubmit(onSubmit)}
-      className="mb-4 rounded bg-white px-8 pb-8 pt-6 shadow-md"
-    >
+    <form method="POST" onSubmit={handleSubmit(onSubmit)} className="mb-4 px-8 pb-8 pt-6">
       <TextInput type="text" registration={register('name')} label="Name" error={errors.name} />
 
       <TextInput type="email" registration={register('email')} label="Email" error={errors.email} />
