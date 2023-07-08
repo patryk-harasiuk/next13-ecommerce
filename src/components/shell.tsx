@@ -9,7 +9,7 @@ export function Shell({ children, layout, className, ...props }: Props) {
   return (
     <section
       className={cn(
-        'flex items-center gap-8 pb-8 pt-6 md:py-8',
+        'grid items-center gap-8 pb-8 pt-6 md:py-8',
         layout === 'default' && 'container',
         layout === 'auth' && 'container max-w-lg',
         className,
