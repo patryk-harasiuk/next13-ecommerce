@@ -84,7 +84,6 @@ html {
 
 html,
 body {
-  background: white;
   height: 100%;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -125,4 +124,19 @@ h6 {
 #__next {
   isolation: isolate;
   height: 100%;
+}
+
+@layer base {
+  * {
+    @apply: border-border;
+  }
+  body {
+    @apply: bg-background text-foreground;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    @apply: px-4;
+  }
 }

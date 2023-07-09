@@ -118,7 +118,7 @@ const RegisterForm = (): JSX.Element => {
             query: null,
           }}
         >
-          Sign up
+          Sign in
         </Link>
       </p>
     </form>
