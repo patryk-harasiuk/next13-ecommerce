@@ -25,9 +25,9 @@ export default async function LobbyLayout({ children }: Props) {
   const user = session ? await getProfile(session.id) : null;
 
   return (
-    <div className="relative flex min-h-screen flex-col">
+    <div className="relative flex min-h-full flex-col">
       <SiteHeader user={user} />
-      <main className="min-w-full overflow-x-clip px-8 py-12 md:py-16">{children}</main>
+      <main className="flex-1">{children}</main>
       <SiteFooter />
     </div>
   );
