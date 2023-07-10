@@ -23,17 +23,17 @@ export function SiteHeader({ user }: Props) {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   return (
-    <header className="flex h-[72px] w-full items-center justify-between border-b border-gray-400 p-[18px] md:items-baseline md:justify-start md:px-8">
+    <header className="sticky z-40 flex h-[72px] w-full items-center justify-between border-b  border-gray-400 bg-background p-[18px] md:items-baseline md:justify-start md:px-8">
       <div className="flex-[revert] md:flex md:flex-1">
         <Link href="/">
           <h1 className="text-2xl font-extrabold text-gray-800">
-            Yee<span>Shirts</span>
+            Next13<span className="ml-4">eCommerce</span>
           </h1>
         </Link>
       </div>
 
       <nav className="font-600 mx-12 hidden gap-12 text-lg text-gray-700 md:flex">
-        <ul className="flex gap-4">
+        <ul className="flex gap-4 text-muted-foreground">
           <li>
             <Link
               href="/sale"

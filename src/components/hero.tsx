@@ -53,6 +53,11 @@ const Hero = () => {
     >
       <div className="aspect-h-9 aspect-w-16">
         <div className="absolute inset-0 z-10 bg-black/60" />
+
+        {/* <h1 className="absolute z-30 text-center text-6xl font-bold tracking-tight">
+          {heroImages[currentImage].title}
+        </h1> */}
+
         <Image
           src={heroImages[currentImage].src}
           alt={heroImages[currentImage].title}
