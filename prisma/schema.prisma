@@ -28,13 +28,13 @@ model Product {
   name        String
   price       Decimal @db.Decimal(9,2)
   image       String
-  category    Category @default(tshirt)
+  category    Category @default(clothing)
+  subcategory String
   createdAt    DateTime       @default(now()) @map(name: "created_at")
 }
 
 enum Category {
-  tshirt
-  knitwear
-  shoes
-  jeans
+ clothing
+ shoes
+ accessories
 }

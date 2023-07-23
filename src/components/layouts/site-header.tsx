@@ -1,12 +1,8 @@
 'use client';
 
 import { User } from '@prisma/client';
-import Image from 'next/image';
 import Link from 'next/link';
-import UserIcon from 'public/assets/icons/user.svg';
 import { useState } from 'react';
-
-import { cn } from '@/utils/cn';
 
 import { Icons } from '../icon';
 import Badge from '../ui/badge';
@@ -53,12 +49,19 @@ export function SiteHeader({ user }: Props) {
 
       <div className="flex gap-8 md:hidden">
         {user ? (
-          <Link href="/login" className={cn(buttonVariants({ variant: 'link' }))}>
-            Sign in
+          <Link href="/login">
+            <div
+              className={buttonVariants({
+                size: 'sm',
+              })}
+            >
+              Sign In
+              <span className="sr-only">Sign In</span>
+            </div>
           </Link>
         ) : (
           <Link href="/account">
-            <Image alt="user" src={UserIcon} width="20" height="20" />
+            <Icons.user className="mr-2 h-4 w-4" aria-hidden="true" /> Account
           </Link>
         )}
 

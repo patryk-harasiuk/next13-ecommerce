@@ -17,7 +17,7 @@ const MobileMenu = ({ isOpen, onDismiss }: Props) => (
     onDismiss={onDismiss}
     className="fixed inset-0 flex h-full justify-end bg-[#6064C]"
   >
-    <DialogContent className="flex h-full w-[300px] items-center bg-white pl-4">
+    <DialogContent className="flex h-full w-[300px] items-center bg-background pl-4">
       <UnstyledButton onClick={onDismiss} className="absolute right-0 top-[10px] p-4">
         <Image src={CloseIcon} alt="Dismiss menu" />
         <VisuallyHidden>Dismiss menu</VisuallyHidden>
