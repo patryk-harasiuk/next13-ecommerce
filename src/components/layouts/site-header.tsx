@@ -3,16 +3,14 @@
 import { User } from '@prisma/client';
 import Image from 'next/image';
 import Link from 'next/link';
-import HamburgerMenu from 'public/assets/icons/menu.svg';
-import CartIcon from 'public/assets/icons/shopping-bag.svg';
 import UserIcon from 'public/assets/icons/user.svg';
 import { useState } from 'react';
 
 import { cn } from '@/utils/cn';
 
-import { buttonVariants } from '../ui/button';
-import UnstyledButton from '../ui/unstyled-button';
-import VisuallyHidden from '../visually-hidden';
+import { Icons } from '../icon';
+import Badge from '../ui/badge';
+import { Button, buttonVariants } from '../ui/button';
 import MobileMenu from './mobile-menu';
 
 type Props = {
@@ -20,10 +18,10 @@ type Props = {
 };
 
 export function SiteHeader({ user }: Props) {
-  const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky z-40 flex h-[72px] w-full items-center justify-between border-b  border-gray-400 bg-background p-[18px] md:items-baseline md:justify-start md:px-8">
+    <header className="sticky z-40 flex h-[72px] w-full items-center justify-between border-b bg-background p-[18px] md:items-baseline md:justify-start md:px-8">
       <div className="flex-[revert] md:flex md:flex-1">
         <Link href="/">
           <h1 className="text-2xl font-extrabold text-gray-800">
@@ -64,18 +62,23 @@ export function SiteHeader({ user }: Props) {
           </Link>
         )}
 
-        <UnstyledButton>
-          <Image alt="cart" src={CartIcon} width="20" height="20" />
-          <VisuallyHidden>View Cart</VisuallyHidden>
-        </UnstyledButton>
+        <Button aria-label="Cart" variant="outline" size="icon" className="relative">
+          <Badge className="absolute -right-2 -top-2 h-6 w-6 rounded-full p-2">1</Badge>
 
-        <UnstyledButton onClick={() => setShowMobileMenu(true)}>
-          <Image alt="menu" src={HamburgerMenu} width="20" height="20" />
-          <VisuallyHidden>Mobile menu</VisuallyHidden>
-        </UnstyledButton>
+          <Icons.shoppingCart className="h-4 w-4" aria-hidden="true" />
+        </Button>
+
+        <Button
+          variant="ghost"
+          className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 lg:hidden"
+          onClick={() => setIsMobileMenuOpen(true)}
+        >
+          <Icons.menu className="h-6 w-6" aria-hidden="true" />
+          <span className="sr-only">{isMobileMenuOpen ? 'Close menu' : 'Open menu'}</span>
+        </Button>
       </div>
 
-      <MobileMenu isOpen={showMobileMenu} onDismiss={() => setShowMobileMenu(false)} />
+      <MobileMenu isOpen={isMobileMenuOpen} onDismiss={() => setIsMobileMenuOpen(false)} />
 
       <div className="hidden md:flex md:flex-1" />
     </header>

@@ -13,6 +13,7 @@ import {
   DollarSign,
   Download,
   Loader2,
+  Menu,
   Moon,
   Shirt,
   ShoppingBag,
@@ -29,6 +30,7 @@ export type Icon = LucideIcon;
 export const Icons = {
   sun: SunMedium,
   moon: Moon,
+  menu: Menu,
   close: X,
   spinner: Loader2,
   chevronLeft: ChevronLeft,
