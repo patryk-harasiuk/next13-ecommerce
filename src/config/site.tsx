@@ -15,6 +15,7 @@ export const siteConfig = {
             title: 'Products',
             href: '/products',
             description: 'All of our products',
+            items: [],
           },
         ],
       },

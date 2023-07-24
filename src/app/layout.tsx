@@ -5,7 +5,7 @@ import { Inter as FontSans } from 'next/font/google';
 import localFont from 'next/font/local';
 
 import Providers from '@/components/layouts/providers';
-import { cn } from '@/utils/cn';
+import { cn } from '@/lib/utils';
 
 const fontSans = FontSans({
   subsets: ['latin'],
