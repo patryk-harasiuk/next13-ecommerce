@@ -17,7 +17,7 @@ export function SiteHeader({ user }: Props) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky z-40 flex h-[72px] w-full items-center justify-between border-b bg-background p-[18px] md:items-baseline md:justify-start md:px-8">
+    <header className="sticky z-40 flex h-72 w-full items-center justify-between border-b bg-background p-18 md:items-baseline md:justify-start md:px-8">
       <div className="flex-[revert] md:flex md:flex-1">
         <Link href="/">
           <h1 className="text-2xl font-extrabold text-gray-800">
@@ -27,24 +27,7 @@ export function SiteHeader({ user }: Props) {
       </div>
 
       <nav className="font-600 mx-12 hidden gap-12 text-lg text-gray-700 md:flex">
-        <ul className="flex gap-4 text-muted-foreground">
-          <li>
-            <Link
-              href="/sale"
-              className="rounded-md px-3 py-2 text-sm font-medium  hover:bg-gray-700 hover:text-gray-300"
-            >
-              Sale
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/new"
-              className="rounded-md px-3 py-2 text-sm font-medium  hover:bg-gray-700 hover:text-gray-300"
-            >
-              New&nbsp;Releases
-            </Link>
-          </li>
-        </ul>
+        <ul className="flex gap-4 text-muted-foreground"></ul>
       </nav>
 
       <div className="flex gap-8 md:hidden">
@@ -81,7 +64,7 @@ export function SiteHeader({ user }: Props) {
         </Button>
       </div>
 
-      <MobileMenu isOpen={isMobileMenuOpen} onDismiss={() => setIsMobileMenuOpen(false)} />
+      {/* <MobileMenu isOpen={isMobileMenuOpen} onDismiss={() => setIsMobileMenuOpen(false)} /> */}
 
       <div className="hidden md:flex md:flex-1" />
     </header>

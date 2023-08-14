@@ -1,40 +1,57 @@
-import { DialogContent, DialogOverlay } from '@reach/dialog';
-import Image from 'next/image';
+import { AccordionItem } from '@radix-ui/react-accordion';
 import Link from 'next/link';
-import CloseIcon from 'public/assets/icons/close.svg';
+import { useState } from 'react';
 
-import UnstyledButton from '@/components/ui/unstyled-button';
-import VisuallyHidden from '@/components/visually-hidden';
+import { siteConfig } from '@/config/site';
 
-type Props = {
-  isOpen: boolean;
-  onDismiss: VoidFunction;
+import { Icons } from '../icon';
+import { Accordion } from '../ui/accordion';
+import { Button } from '../ui/button';
+import { ScrollArea } from '../ui/scroll-area';
+import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet';
+
+const MobileMenu = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <Sheet>
+      <SheetTrigger>
+        <Button
+          variant="ghost"
+          className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 lg:hidden"
+        >
+          <Icons.menu className="h-6 w-6" />
+          <span className="sr-only">Toggle Menu</span>
+        </Button>
+      </SheetTrigger>
+
+      <SheetContent side="left" className="pl-1 pr-0">
+        <div className="px-7">
+          <Link
+            aria-label="Home"
+            href="/"
+            className="flex items-center"
+            onClick={() => setIsOpen(false)}
+          >
+            <Icons.shirt className="mr-2 h-4 w-4" aria-hidden="true" />
+            <span className="font-bold">{siteConfig.name}</span>
+          </Link>
+        </div>
+
+        <ScrollArea>
+          <div className="pl-1 pr-7">
+            <Accordion type="single" collapsible className="w-full">
+              {/* {siteConfig.mainNav.map((item, index) => (
+                <AccordionItem value={item}>
+
+                </AccordionItem>
+              ))} */}
+            </Accordion>
+          </div>
+        </ScrollArea>
+      </SheetContent>
+    </Sheet>
+  );
 };
-
-const MobileMenu = ({ isOpen, onDismiss }: Props) => (
-  <DialogOverlay
-    isOpen={isOpen}
-    onDismiss={onDismiss}
-    className="fixed inset-0 flex h-full justify-end bg-[#6064C]"
-  >
-    <DialogContent className="flex h-full w-[300px] items-center bg-background pl-4">
-      <UnstyledButton onClick={onDismiss} className="absolute right-0 top-[10px] p-4">
-        <Image src={CloseIcon} alt="Dismiss menu" />
-        <VisuallyHidden>Dismiss menu</VisuallyHidden>
-      </UnstyledButton>
-
-      <nav>
-        <ul className=" flex flex-col gap-4 text-lg font-medium uppercase">
-          <li>
-            <Link href="#">Sale</Link>
-          </li>
-          <li>
-            <Link href="#">New&nbsp;Releases</Link>
-          </li>
-        </ul>
-      </nav>
-    </DialogContent>
-  </DialogOverlay>
-);
 
 export default MobileMenu;

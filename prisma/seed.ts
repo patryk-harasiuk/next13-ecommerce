@@ -13,6 +13,9 @@ const products: Prisma.Product[] = [
     name: 'White Tee',
     price: new Prisma.Prisma.Decimal(500),
     image: '/white-tee.jpg',
+    category: 'clothing',
+    subcategory: 'Hoodies',
+    createdAt: new Date(),
   },
 
   {
@@ -21,6 +24,9 @@ const products: Prisma.Product[] = [
     name: 'Black Tee',
     price: new Prisma.Prisma.Decimal(1500),
     image: '/black-tee.jpg',
+    category: 'clothing',
+    subcategory: 'T-shirts',
+    createdAt: new Date(),
   },
 
   {
@@ -29,6 +35,9 @@ const products: Prisma.Product[] = [
     name: 'White Hoodie',
     price: new Prisma.Prisma.Decimal(2500),
     image: '/white-hoodie.jpg',
+    category: 'clothing',
+    subcategory: 'Hoodies',
+    createdAt: new Date(),
   },
 
   {
@@ -37,6 +46,9 @@ const products: Prisma.Product[] = [
     name: 'Blue Tee',
     price: new Prisma.Prisma.Decimal(900),
     image: '/blue-tee.jpg',
+    category: 'clothing',
+    subcategory: 'T-shirts',
+    createdAt: new Date(),
   },
 
   {
@@ -45,6 +57,9 @@ const products: Prisma.Product[] = [
     name: 'Black Hoodie',
     price: new Prisma.Prisma.Decimal(1000),
     image: '/black-hoodie.jpg',
+    category: 'clothing',
+    subcategory: 'Hoodies',
+    createdAt: new Date(),
   },
 
   {
@@ -53,6 +68,9 @@ const products: Prisma.Product[] = [
     name: 'Blue Tee',
     price: new Prisma.Prisma.Decimal(500),
     image: '/blue-tee.jpg',
+    category: 'clothing',
+    subcategory: 'T-shirts',
+    createdAt: new Date(),
   },
 
   {
@@ -61,6 +79,9 @@ const products: Prisma.Product[] = [
     name: 'Red Tee',
     price: new Prisma.Prisma.Decimal(500),
     image: '/white-tee.jpg',
+    category: 'clothing',
+    subcategory: 'T-shirts',
+    createdAt: new Date(),
   },
 ];
 
