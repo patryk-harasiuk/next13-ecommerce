@@ -1,7 +1,8 @@
-import { AccordionItem } from '@radix-ui/react-accordion';
+import { AccordionContent, AccordionItem, AccordionTrigger } from '@radix-ui/react-accordion';
 import Link from 'next/link';
 import { useState } from 'react';
 
+import { productCategories } from '@/config/products';
 import { siteConfig } from '@/config/site';
 
 import { Icons } from '../icon';
@@ -14,8 +15,8 @@ const MobileMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <Sheet>
-      <SheetTrigger>
+    <Sheet open={isOpen} onOpenChange={setIsOpen}>
+      <SheetTrigger asChild className="flex-[revert] md:flex md:flex-1">
         <Button
           variant="ghost"
           className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 lg:hidden"
@@ -41,11 +42,20 @@ const MobileMenu = () => {
         <ScrollArea>
           <div className="pl-1 pr-7">
             <Accordion type="single" collapsible className="w-full">
-              {/* {siteConfig.mainNav.map((item, index) => (
-                <AccordionItem value={item}>
-
+              {productCategories.map((item, index) => (
+                <AccordionItem value={item.title} key={index}>
+                  <AccordionTrigger className="text-sm capitalize">{item.title}</AccordionTrigger>
+                  <AccordionContent>
+                    <div className="flex flex-col space-y-2">
+                      {item.subcategories.map((subcategory, index) => (
+                        <div key={index} className="text-foreground/70 transition-colors">
+                          {item.title}
+                        </div>
+                      ))}
+                    </div>
+                  </AccordionContent>
                 </AccordionItem>
-              ))} */}
+              ))}
             </Accordion>
           </div>
         </ScrollArea>
@@ -55,3 +65,35 @@ const MobileMenu = () => {
 };
 
 export default MobileMenu;
+
+// {mainNavItems?.map((item, index) => (
+//   <AccordionItem value={item.title} key={index}>
+//     <AccordionTrigger className="text-sm capitalize">
+//       {item.title}
+//     </AccordionTrigger>
+//     <AccordionContent>
+//       <div className="flex flex-col space-y-2">
+//         {item.items?.map((subItem, index) =>
+//           subItem.href ? (
+//             <MobileLink
+//               key={index}
+//               href={String(subItem.href)}
+//               pathname={pathname}
+//               setIsOpen={setIsOpen}
+//               disabled={subItem.disabled}
+//             >
+//               {subItem.title}
+//             </MobileLink>
+//           ) : (
+//             <div
+//               key={index}
+//               className="text-foreground/70 transition-colors"
+//             >
+//               {item.title}
+//             </div>
+//           )
+//         )}
+//       </div>
+//     </AccordionContent>
+//   </AccordionItem>
+// ))}
