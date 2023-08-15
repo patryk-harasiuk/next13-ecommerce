@@ -1,8 +1,8 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: 'Clothing shop 13',
-  description: 'An open source e-commerce skateshop build with everything new in Next.js 13',
+  name: 'Next13 shop',
+  description: 'E-commerce built with Next13, NextAuth, shadcnui',
   links: {
     github: 'https://github.com/patryk-harasiuk/next13-ecommerce',
   },
