@@ -26,30 +26,30 @@ const MobileMenu = () => {
         </Button>
       </SheetTrigger>
 
-      <SheetContent side="left" className="pl-1 pr-0">
-        <div className="px-7">
-          <Link
-            aria-label="Home"
-            href="/"
-            className="flex items-center"
-            onClick={() => setIsOpen(false)}
-          >
-            <Icons.shirt className="mr-2 h-4 w-4" aria-hidden="true" />
-            <span className="font-bold">{siteConfig.name}</span>
-          </Link>
-        </div>
+      <SheetContent side="left">
+        <Link
+          aria-label="Home"
+          href="/"
+          className="flex items-center pb-6"
+          onClick={() => setIsOpen(false)}
+        >
+          <Icons.shirt className="mr-2 h-4 w-4" aria-hidden="true" />
+          <span className="font-bold">{siteConfig.name}</span>
+        </Link>
 
         <ScrollArea>
-          <div className="pl-1 pr-7">
+          <div className="pl-1">
             <Accordion type="single" collapsible className="w-full">
-              {productCategories.map((item, index) => (
-                <AccordionItem value={item.title} key={index}>
-                  <AccordionTrigger className="text-sm capitalize">{item.title}</AccordionTrigger>
+              {productCategories.map((category, index) => (
+                <AccordionItem value={category.title} key={index}>
+                  <AccordionTrigger className="text-sm capitalize">
+                    {category.title}
+                  </AccordionTrigger>
                   <AccordionContent>
                     <div className="flex flex-col space-y-2">
-                      {item.subcategories.map((subcategory, index) => (
+                      {category.subcategories.map((subcategory, index) => (
                         <div key={index} className="text-foreground/70 transition-colors">
-                          {item.title}
+                          {subcategory.title}
                         </div>
                       ))}
                     </div>

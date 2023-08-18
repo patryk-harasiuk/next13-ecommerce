@@ -4,7 +4,7 @@ import { User } from '@prisma/client';
 import Link from 'next/link';
 
 import { Icons } from '../icon';
-import Badge from '../ui/badge';
+import { Badge } from '../ui/badge';
 import { Button, buttonVariants } from '../ui/button';
 import MainMenu from './main-menu';
 import MobileMenu from './mobile-menu';
