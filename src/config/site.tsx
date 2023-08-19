@@ -1,3 +1,7 @@
+import { slugify } from '@/utils/slugify';
+
+import { productCategories } from './products';
+
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
@@ -8,17 +12,24 @@ export const siteConfig = {
   },
   mainNav: [
     {
-      items: {
-        title: 'Lobby',
-        items: [
-          {
-            title: 'Products',
-            href: '/products',
-            description: 'All of our products',
-            items: [],
-          },
-        ],
-      },
+      title: 'Lobby',
+      items: [
+        {
+          title: 'Products',
+          href: '/products',
+          description: 'All of our products',
+          items: [],
+        },
+      ],
     },
+    ...productCategories.map((category) => ({
+      title: category.title,
+      items: category.subcategories.map((subcategory) => ({
+        title: subcategory.title,
+        href: `/categories/${slugify(category.title)}/${subcategory.slug}`,
+        description: subcategory.description,
+        items: [],
+      })),
+    })),
   ],
 };
