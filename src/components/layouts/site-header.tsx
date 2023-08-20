@@ -22,6 +22,11 @@ export function SiteHeader({ user }: Props) {
 
         <div className="flex flex-1 items-center justify-end space-x-4">
           {user ? (
+            <Link href="/dashboard/account">
+              <Icons.user className="mr-2 h-6 w-6" aria-hidden="true" />
+              <span className="sr-only">Go to account</span>
+            </Link>
+          ) : (
             <Link href="/login">
               <div
                 className={buttonVariants({
@@ -31,11 +36,6 @@ export function SiteHeader({ user }: Props) {
                 Sign In
                 <span className="sr-only">Sign In</span>
               </div>
-            </Link>
-          ) : (
-            <Link href="/account">
-              <Icons.user className="mr-2 h-6 w-6" aria-hidden="true" />
-              <span className="sr-only">Go to account</span>
             </Link>
           )}
 
