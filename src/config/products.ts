@@ -1,6 +1,6 @@
 import { Product } from '@prisma/client';
 
-export const productCategories: {
+type ProductCategories = {
   title: Product['category'];
   subcategories: {
     title: string;
@@ -8,7 +8,9 @@ export const productCategories: {
     image?: string;
     slug: string;
   }[];
-}[] = [
+}[];
+
+export const productCategories: ProductCategories = [
   {
     title: 'clothing',
     subcategories: [

@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 
 import SiteFooter from '@/components/layouts/site-footer';
 import { SiteHeader } from '@/components/layouts/site-header';
-import prisma from '@/lib/prisma-client';
+import db from '@/lib/prisma-client';
 import { getCurrentUser } from '@/lib/session';
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
 };
 
 async function getProfile(id: User['id']) {
-  const user = await prisma.user.findUnique({
+  const user = await db.user.findUnique({
     where: { id },
     select: { createdAt: true, email: true, name: true },
   });
