@@ -15,7 +15,7 @@ type Props = {
 
 export function SiteHeader({ user }: Props) {
   return (
-    <header className="sticky top-0 z-20 flex h-72 w-full items-center border-b bg-background p-18 md:px-8">
+    <header className="sticky top-0 z-40 flex h-72 w-full items-center border-b bg-background p-18 md:px-8">
       <div className="container flex h-16 items-center">
         <MobileMenu />
         <MainMenu />
