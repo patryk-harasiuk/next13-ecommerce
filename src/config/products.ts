@@ -2,6 +2,7 @@ import { Product } from '@prisma/client';
 
 type ProductCategories = {
   title: Product['category'];
+  image?: string;
   subcategories: {
     title: string;
     description?: string;
@@ -13,6 +14,7 @@ type ProductCategories = {
 export const productCategories: ProductCategories = [
   {
     title: 'clothing',
+    image: '/assets/images/category-clothing.webp',
     subcategories: [
       {
         title: 'T-shirts',
@@ -33,6 +35,7 @@ export const productCategories: ProductCategories = [
   },
   {
     title: 'shoes',
+    image: '/assets/images/category-shoes.webp',
     subcategories: [
       {
         title: 'Low Tops',
@@ -53,6 +56,7 @@ export const productCategories: ProductCategories = [
   },
   {
     title: 'accessories',
+    image: '/assets/images/category-accessories-webp',
     subcategories: [
       {
         title: 'Socks',
