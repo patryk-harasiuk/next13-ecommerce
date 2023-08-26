@@ -1,15 +1,18 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import ProductCard from '@/components/cards/product-card';
 import { Header } from '@/components/header';
 import Hero from '@/components/hero';
 import Shell from '@/components/shell';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
+import { buttonVariants } from '@/components/ui/button';
 import { productCategories } from '@/config/products';
 import db from '@/lib/prisma-client';
+import { cn } from '@/lib/utils';
 
 export async function IndexPage() {
-  const allProducts = await db.product.findMany({
+  const lastProducts = await db.product.findMany({
     orderBy: {
       createdAt: 'desc',
     },
@@ -61,6 +64,20 @@ export async function IndexPage() {
                 </div>
               </div>
             </Link>
+          ))}
+        </div>
+      </section>
+
+      <section id="last products" className="space-y-6">
+        <div className="flex items-center">
+          <h2 className="flex-1 text-2xl font-medium sm:text-3xl">Last products</h2>
+          <Link aria-label="Products" href="/products">
+            <div className={cn(buttonVariants({ size: 'sm' }))}>View all</div>
+          </Link>
+        </div>
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {lastProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
           ))}
         </div>
       </section>
