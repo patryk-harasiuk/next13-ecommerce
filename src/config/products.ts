@@ -56,7 +56,7 @@ export const productCategories: ProductCategories = [
   },
   {
     title: 'accessories',
-    image: '/assets/images/category-accessories-webp',
+    image: '/assets/images/category-accessories.webp',
     subcategories: [
       {
         title: 'Socks',

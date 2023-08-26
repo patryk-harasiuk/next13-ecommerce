@@ -1,6 +1,10 @@
+import Image from 'next/image';
+import Link from 'next/link';
+
 import { Header } from '@/components/header';
 import Hero from '@/components/hero';
 import Shell from '@/components/shell';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { productCategories } from '@/config/products';
 import db from '@/lib/prisma-client';
 
@@ -13,8 +17,8 @@ export async function IndexPage() {
   });
 
   return (
-    <Shell className="gap-y-12">
-      <section className="flex flex-col gap-y-4">
+    <Shell layout="default" className="gap-y-12">
+      <section id="hero" className="flex flex-col gap-y-4">
         <Hero />
         <Header
           className="place-items-center text-center"
@@ -23,8 +27,8 @@ export async function IndexPage() {
         />
       </section>
 
-      <section className="space-y-6 py-6 md:pt-10 lg:pt-24">
-        <div className="flex w-full flex-col items-center gap-y-4 space-y-4 text-center">
+      <section id="categories" className="space-y-6 py-6 md:pt-10 lg:pt-24">
+        <div className="mx-auto flex max-w-[58rem] flex-col items-center gap-y-4 space-y-4 text-center">
           <h2 className="text-3xl font-bold md:text-5xl">Categories</h2>
 
           <p className="text-base text-muted-foreground sm:text-lg sm:leading-7">
@@ -32,8 +36,32 @@ export async function IndexPage() {
           </p>
         </div>
 
-        <div className="sm-grid-cols-2 grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
-          {/* {productCategories} */}
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {productCategories.map((category) => (
+            <Link
+              aria-label={`Go to ${category.title}`}
+              key={category.title}
+              href={`/categories/${category.title}`}
+            >
+              <div className="group relative overflow-hidden rounded-md">
+                <AspectRatio ratio={4 / 5}>
+                  <div className="absolute inset-0 z-10 bg-black/60 transition-colors group-hover:bg-black/70" />
+                  <Image
+                    src={category.image ?? '/assets/images/product-placeholder.webp'}
+                    alt={category.title}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    fill
+                    className="object-cover transition-transform group-hover:scale-105"
+                  />
+                </AspectRatio>
+                <div className="absolute inset-0 z-20 flex items-center justify-center">
+                  <h3 className="text-3xl font-medium capitalize text-slate-100 md:text-2xl">
+                    {category.title}
+                  </h3>
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
     </Shell>
