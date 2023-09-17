@@ -2,12 +2,9 @@
 
 import db from '@/lib/prisma-client';
 import { cartItemSchema } from '@/lib/validations/cart';
-import { CartItem, Cart } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 import { type z } from 'zod';
-
-export async function getCartAction(): Promise<any> {}
 
 export async function addToCartAction(item: z.infer<typeof cartItemSchema>) {
   const cookieStore = cookies();
@@ -105,7 +102,9 @@ export async function addToCartAction(item: z.infer<typeof cartItemSchema>) {
   revalidatePath('/');
 }
 
-export async function getCartItemsAction(cartId: string) {
+export async function getCartItemsAction() {
+  const cartId = cookies().get('cartId')?.value;
+
   if (!cartId || isNaN(Number(cartId))) return [];
 
   const cartItems = await db.product.findMany({
