@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import ProductCard from '@/components/cards/product-card';
+import ProductCard from '@/components/cards/product';
 import { Header } from '@/components/header';
 import Hero from '@/components/hero';
 import Shell from '@/components/shell';

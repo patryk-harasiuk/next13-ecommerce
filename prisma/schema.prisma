@@ -28,7 +28,7 @@ model Product {
   id          String   @id
   description String
   name        String
-  price       Decimal  @db.Decimal(9, 2)
+  price       Decimal  @db.Decimal(9, 2) @default("0")
   image       String
   category    Category @default(clothing)
   subcategory String
