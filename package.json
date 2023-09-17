@@ -22,7 +22,7 @@
     "*.{js,css,md}": "prettier --write"
   },
   "prisma": {
-    "seed": "ts-node prisma/seed.ts"
+    "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.15",
@@ -84,6 +84,7 @@
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.3.0",
     "tailwindcss-animate": "^1.0.6",
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.1",
+    "tsx": "^3.12.10"
   }
 }

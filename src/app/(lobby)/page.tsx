@@ -19,6 +19,8 @@ export async function IndexPage() {
     take: 8,
   });
 
+  console.log(lastProducts, 'prods');
+
   return (
     <Shell layout="default" className="gap-y-12">
       <section id="hero" className="flex flex-col gap-y-4">

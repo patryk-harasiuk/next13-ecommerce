@@ -8,7 +8,7 @@ import { useTransition } from 'react';
 
 import { cn } from '@/lib/utils';
 
-import { Card, CardHeader } from '../ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 
 type Props = {
   product: Product;
@@ -24,7 +24,7 @@ const ProductCard = ({ product, className }: Props) => {
         <CardHeader className="border-b p-0">
           <AspectRatio ratio={4 / 3}>
             <Image
-              src={product.image ?? '/assets/images/product-placeholder.webp'}
+              src={'/assets/images/product-placeholder.webp'}
               alt={product.name}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               fill
@@ -33,6 +33,11 @@ const ProductCard = ({ product, className }: Props) => {
             />
           </AspectRatio>
         </CardHeader>
+      </Link>
+      <Link aria-label={`View ${product.name} details`} href={`/product/${product.id}`}>
+        <CardContent className="grid gap-2.5 p-4">
+          <CardTitle className="line-clamp-1">{product.name}</CardTitle>
+        </CardContent>
       </Link>
     </Card>
   );
