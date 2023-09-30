@@ -1,10 +1,12 @@
 'use server';
 
-import db from '@/lib/prisma-client';
-import { cartItemSchema } from '@/lib/validations/cart';
 import { revalidatePath } from 'next/cache';
+import { deleteCache } from 'next/dist/server/lib/render-server';
 import { cookies } from 'next/headers';
 import { type z } from 'zod';
+
+import db from '@/lib/prisma-client';
+import { cartItemSchema, deleteCartItemSchema } from '@/lib/validations/cart';
 
 export async function addToCartAction(item: z.infer<typeof cartItemSchema>) {
   const cookieStore = cookies();
@@ -73,31 +75,29 @@ export async function addToCartAction(item: z.infer<typeof cartItemSchema>) {
     },
   });
 
-  if (cartItem) {
-    await db.cartItem.update({
-      where: {
-        productId_cartId: {
-          productId: item.productId,
-          cartId: cart.id,
+  await (cartItem
+    ? db.cartItem.update({
+        where: {
+          productId_cartId: {
+            productId: item.productId,
+            cartId: cart.id,
+          },
         },
-      },
-      data: {
-        quantity: (cartItem.quantity += item.quantity),
-      },
-    });
-  } else {
-    await db.cartItem.update({
-      where: {
-        productId_cartId: {
-          productId: item.productId,
-          cartId: cart.id,
+        data: {
+          quantity: (cartItem.quantity += item.quantity),
         },
-      },
-      data: {
-        quantity: item.quantity,
-      },
-    });
-  }
+      })
+    : db.cartItem.update({
+        where: {
+          productId_cartId: {
+            productId: item.productId,
+            cartId: cart.id,
+          },
+        },
+        data: {
+          quantity: item.quantity,
+        },
+      }));
 
   revalidatePath('/');
 }
@@ -105,7 +105,7 @@ export async function addToCartAction(item: z.infer<typeof cartItemSchema>) {
 export async function getCartItemsAction() {
   const cartId = cookies().get('cartId')?.value;
 
-  if (!cartId || isNaN(Number(cartId))) return [];
+  if (!cartId || Number.isNaN(Number(cartId))) return [];
 
   const cartItems = await db.product.findMany({
     where: {
@@ -120,6 +120,19 @@ export async function getCartItemsAction() {
   return cartItems;
 }
 
+export async function deleteCartItemAction(input: z.infer<typeof deleteCartItemSchema>) {
+  await db.cartItem.delete({
+    where: {
+      productId_cartId: {
+        productId: input.productId,
+        cartId: input.cartId,
+      },
+    },
+  });
+
+  revalidatePath('/');
+}
+
 export async function deleteCartAction() {
   const cartId = cookies().get('cartId')?.value;
 
@@ -127,8 +140,8 @@ export async function deleteCartAction() {
     throw new Error('CartId not found');
   }
 
-  if (isNaN(Number(cartId))) {
-    throw new Error('Invalid cartId, please try again.');
+  if (Number.isNaN(Number(cartId))) {
+    throw new TypeError('Invalid cartId, please try again.');
   }
 
   await db.cart.delete({ where: { id: cartId } });

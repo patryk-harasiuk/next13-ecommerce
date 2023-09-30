@@ -5,3 +5,8 @@ export const cartItemSchema = z.object({
   quantity: z.number().min(0),
   cartId: z.string(),
 });
+
+export const deleteCartItemSchema = z.object({
+  productId: z.string(),
+  cartId: z.string(),
+});
