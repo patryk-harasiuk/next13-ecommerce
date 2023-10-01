@@ -10,3 +10,7 @@ export const deleteCartItemSchema = z.object({
   productId: z.string(),
   cartId: z.string(),
 });
+
+export const deleteCartItemsSchema = z.object({
+  cartId: z.string(),
+});

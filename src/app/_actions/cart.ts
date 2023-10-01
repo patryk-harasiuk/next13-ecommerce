@@ -1,12 +1,15 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { deleteCache } from 'next/dist/server/lib/render-server';
 import { cookies } from 'next/headers';
 import { type z } from 'zod';
 
 import db from '@/lib/prisma-client';
-import { cartItemSchema, deleteCartItemSchema } from '@/lib/validations/cart';
+import {
+  cartItemSchema,
+  deleteCartItemSchema,
+  deleteCartItemsSchema,
+} from '@/lib/validations/cart';
 
 export async function addToCartAction(item: z.infer<typeof cartItemSchema>) {
   const cookieStore = cookies();
@@ -127,6 +130,16 @@ export async function deleteCartItemAction(input: z.infer<typeof deleteCartItemS
         productId: input.productId,
         cartId: input.cartId,
       },
+    },
+  });
+
+  revalidatePath('/');
+}
+
+export async function deleteCartItemsAction(input: z.infer<typeof deleteCartItemsSchema>) {
+  await db.cartItem.deleteMany({
+    where: {
+      cartId: input.cartId,
     },
   });
 
